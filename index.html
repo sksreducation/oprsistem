@@ -5,56 +5,278 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Generator OPR SK Simpang Rawai</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8f9fa; padding: 15px; margin: 0; }
-    .card { background: #fff; padding: 20px; border-radius: 12px; max-width: 650px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h2 { text-align: center; color: #1a252f; margin-top: 0; }
-    .form-group { margin-bottom: 12px; }
-    label { font-weight: bold; display: block; margin-bottom: 4px; font-size: 0.9em; }
-    input, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 1em; }
-    textarea { height: 85px; }
-    .btn { width: 100%; padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 8px; font-size: 1em; }
-    .btn-ai { background: #6f42c1; color: white; }
-    .btn-submit { background: #198754; color: white; }
-    .btn-print { background: #0d6efd; color: white; }
-    .btn:disabled { opacity: 0.5; }
-    .sheet-container { margin-top: 25px; border-top: 2px dashed #ccc; padding-top: 15px; }
-    iframe { width: 100%; height: 400px; border: 1px solid #ddd; border-radius: 8px; }
+    :root {
+      --primary: #0d6efd;
+      --primary-hover: #0b5ed7;
+      --success: #198754;
+      --purple: #6f42c1;
+      --dark: #1e293b;
+      --light-bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--light-bg);
+      color: var(--dark);
+      margin: 0;
+      padding: 12px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+      border: 1px solid var(--border);
+    }
+
+    /* Pengepala Header & Logo */
+    .header-branding {
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--light-bg);
+    }
+
+    .school-logo {
+      width: 90px;
+      height: auto;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    }
+
+    .header-branding h1 {
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin: 0;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .header-branding p {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin: 4px 0 0 0;
+      font-weight: 500;
+    }
+
+    /* Borang Input */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    label {
+      font-weight: 650;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      box-sizing: border-box;
+      font-size: 0.95rem;
+      background-color: #f8fafc;
+      transition: all 0.2s ease;
+      color: var(--dark);
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background-color: #fff;
+      box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.15);
+    }
+
+    textarea {
+      height: 90px;
+      resize: vertical;
+    }
+
+    /* Butang Operasi */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.1s ease, background-color 0.2s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-ai { background-color: var(--purple); color: white; }
+    .btn-submit { background-color: var(--success); color: white; }
+    .btn-print { background-color: var(--primary); color: white; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Preview Gambar Aktiviti */
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .preview-img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    /* Iframe Sheet */
+    .sheet-section {
+      margin-top: 30px;
+      border-top: 2px dashed var(--border);
+      padding-top: 20px;
+    }
+
+    .sheet-section h3 {
+      font-size: 1rem;
+      color: var(--dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 380px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: white;
+    }
+
+    @media (max-width: 500px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: span 1; }
+    }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <h2>📋 Generator OPR Mobile</h2>
-  <form id="oprForm">
-    <div class="form-group"><label>Tajuk Program:</label><input type="text" id="tajuk" value="PROGRAM SAFE 'KAMU BULI POLIS TANGKAP'"></div>
-    <div class="form-group"><label>Unit Anjuran:</label><input type="text" id="unit" value="Unit Hal Ehwal Murid (HEM)"></div>
-    <div class="form-group"><label>Tarikh:</label><input type="text" id="tarikh" value="Khamis (5/11/2026)"></div>
-    <div class="form-group"><label>Masa:</label><input type="text" id="masa" value="11.00 pagi - 12.30 tengah hari"></div>
-    <div class="form-group"><label>Tempat:</label><input type="text" id="tempat" value="Dewan Al Jazari"></div>
-    <div class="form-group"><label>Sasaran:</label><input type="text" id="sasaran" value="Murid Tahap 2"></div>
-    <div class="form-group"><label>Jemputan:</label><input type="text" id="jemputan" value="ASP Tuan Othman bin Ibrahim"></div>
-
-    <button type="button" class="btn btn-ai" onclick="generateAI()">✨ AI Generate Objektif & Impak</button>
-
-    <div class="form-group" style="margin-top:10px;"><label>Objektif:</label><textarea id="objektif">1. Memberi kesedaran dan pendedahan awal mengenai bahaya serta implikasi kes buli di sekolah.
-2. Memupuk disiplin dan kesedaran undang-undang dalam kalangan murid Tahap 2.
-3. Mengeratkan kerjasama antara pihak sekolah dan PDRM.</textarea></div>
-
-    <div class="form-group"><label>Impak:</label><textarea id="impak">Murid mendapat pendedahan jelas tentang akibat perbuatan buli dari sudut undang-undang dan disiplin serta mewujudkan persekitaran sekolah yang selamat.</textarea></div>
-
-    <div class="form-group">
-      <label>Gambar Aktiviti (Maksimum 4):</label>
-      <input type="file" id="gambarInput" accept="image/*" multiple onchange="processImages()">
-      <div id="preview" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;"></div>
+<div class="container">
+  <div class="card">
+    
+    <!-- Pengepala Logo & Sekolah -->
+    <div class="header-branding">
+      <img src="https://i.ibb.co/L8xY342/sk-simpang-rawai-logo.jpg" alt="Logo SK Simpang Rawai" class="school-logo">
+      <h1>SK SIMPANG RAWAI</h1>
+      <p>Sistem Penjana Laporan One Page Report (OPR)</p>
     </div>
 
-    <button type="button" class="btn btn-submit" id="btnSimpan" onclick="simpanKeSheets()">💾 Simpan ke Google Drive & Sheets</button>
-    <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Cetak / PDF</button>
-  </form>
+    <form id="oprForm">
+      <div class="form-group">
+        <label>Tajuk Program</label>
+        <input type="text" id="tajuk" value="PROGRAM SAFE 'KAMU BULI POLIS TANGKAP'" required>
+      </div>
 
-  <div class="sheet-container">
-    <h3>📊 Rekod Laporan OPR (Live Sheet)</h3>
-    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_dLChN5Jo22s1_7vKcJQq-Kr2wdmcL0aS28fARoirj3VHAk8eGcra3Rlm6hSN4Ssv_Lq0SoZSiXUT/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Unit Anjuran</label>
+          <input type="text" id="unit" value="Unit Hal Ehwal Murid (HEM)">
+        </div>
+        <div class="form-group">
+          <label>Tarikh</label>
+          <input type="text" id="tarikh" value="Khamis (5/11/2026)">
+        </div>
+        <div class="form-group">
+          <label>Masa</label>
+          <input type="text" id="masa" value="11.00 am - 12.30 pm">
+        </div>
+        <div class="form-group">
+          <label>Tempat</label>
+          <input type="text" id="tempat" value="Dewan Al Jazari">
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Sasaran</label>
+          <input type="text" id="sasaran" value="Murid Tahap 2">
+        </div>
+        <div class="form-group">
+          <label>Jemputan / Penceramah</label>
+          <input type="text" id="jemputan" value="ASP Tuan Othman bin Ibrahim">
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-ai" onclick="generateAI()">✨ AI Generate Objektif & Impak</button>
+      </div>
+
+      <div class="form-group" style="margin-top: 15px;">
+        <label>Objektif Program</label>
+        <textarea id="objektif">1. Memberi kesedaran dan pendedahan awal mengenai bahaya serta implikasi kes buli di sekolah.
+2. Memupuk disiplin dan kesedaran undang-undang dalam kalangan murid Tahap 2.
+3. Mengeratkan kerjasama antara pihak sekolah dan PDRM.</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Impak Program</label>
+        <textarea id="impak">Murid mendapat pendedahan jelas tentang akibat perbuatan buli dari sudut undang-undang dan disiplin serta mewujudkan persekitaran sekolah yang selamat.</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Muat Naik Gambar Aktiviti (Maksimum 4)</label>
+        <input type="file" id="gambarInput" accept="image/*" multiple onchange="processImages()">
+        <div id="preview" class="preview-grid"></div>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-submit" id="btnSimpan" onclick="simpanKeSheets()">💾 Simpan ke Google Drive & Sheets</button>
+        <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Cetak Laporan / PDF</button>
+      </div>
+    </form>
+
+    <!-- Paparan Live Google Sheet -->
+    <div class="sheet-section">
+      <h3>📊 Rekod Laporan OPR (Google Sheets)</h3>
+      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_dLChN5Jo22s1_7vKcJQq-Kr2wdmcL0aS28fARoirj3VHAk8eGcra3Rlm6hSN4Ssv_Lq0SoZSiXUT/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+    </div>
+
   </div>
 </div>
 
@@ -97,10 +319,7 @@
 
           const previewImg = document.createElement('img');
           previewImg.src = base64Res;
-          previewImg.style.width = '100%';
-          previewImg.style.height = '90px';
-          previewImg.style.objectFit = 'cover';
-          previewImg.style.borderRadius = '6px';
+          previewImg.className = 'preview-img';
           container.appendChild(previewImg);
         };
       };
@@ -111,11 +330,11 @@
   function generateAI() {
     const tajuk = document.getElementById("tajuk").value;
     const sasaran = document.getElementById("sasaran").value;
-    if (!tajuk) return alert("Sila isi Tajuk Program.");
+    if (!tajuk) return alert("Sila isi Tajuk Program terlebih dahulu.");
 
     document.getElementById("objektif").value = `1. Memberi kesedaran mendalam tentang ${tajuk} kepada ${sasaran}.\n2. Memupuk sahsiah dan disiplin terpuji.\n3. Mewujudkan suasana sekolah yang harmoni dan selamat.`;
     document.getElementById("impak").value = `Program ini berjaya meningkatkan kesedaran ${sasaran} dan memperkasakan amalan disiplin di sekolah.`;
-    alert("Objektif & Impak berjaya dijana oleh AI!");
+    alert("Objektif & Impak berjaya dijana!");
   }
 
   async function simpanKeSheets() {
