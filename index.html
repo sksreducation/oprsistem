@@ -9,10 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1e3a8a;
+      --primary: #9333ea;
+      --primary-light: #f472b6;
       --secondary: #0f172a;
-      --accent: #6d28d9;
-      --success: #059669;
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --border: #cbd5e1;
@@ -41,7 +40,7 @@
     }
 
     .header-banner {
-      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+      background: linear-gradient(135deg, #7e22ce 0%, #3b0764 100%);
       border-radius: 12px;
       padding: 20px;
       text-align: center;
@@ -49,9 +48,9 @@
       margin-bottom: 20px;
     }
 
-    .school-logo {
-      width: 80px;
-      height: 80px;
+    .school-logo-web {
+      width: 75px;
+      height: 75px;
       object-fit: contain;
       background: white;
       border-radius: 50%;
@@ -61,7 +60,7 @@
     }
 
     .header-banner h1 { font-size: 1.3rem; margin: 0; font-weight: 800; }
-    .header-banner p { font-size: 0.85rem; margin: 4px 0 0 0; color: #cbd5e1; }
+    .header-banner p { font-size: 0.85rem; margin: 4px 0 0 0; color: #f3e8ff; }
 
     .section-title {
       font-size: 0.9rem;
@@ -81,8 +80,6 @@
     }
 
     .form-group { margin-bottom: 12px; }
-    .form-group.full { grid-column: span 2; }
-
     label { font-weight: 600; display: block; margin-bottom: 4px; font-size: 0.82rem; color: #475569; }
 
     input, textarea {
@@ -118,13 +115,13 @@
       gap: 6px;
     }
 
-    .btn-ai { background: var(--accent); color: white; }
-    .btn-submit { background: var(--success); color: white; }
-    .btn-print { background: var(--primary); color: white; }
+    .btn-ai { background: #7e22ce; color: white; }
+    .btn-submit { background: #059669; color: white; }
+    .btn-print { background: #2563eb; color: white; }
 
     .preview-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       margin-top: 8px;
     }
@@ -141,119 +138,210 @@
     iframe { width: 100%; height: 350px; border: 1.5px solid var(--border); border-radius: 8px; }
 
     /* =========================================================
-       FORMAT LAYOUT KHAS CETAKAN / PDF A4 (1 MUKA SURAT RASMI)
+       FORMAT LAYOUT A4 CETAKAN MODEN (REKA BENTUK POSTER OPR)
        ========================================================= */
     #printArea { display: none; }
 
     @media print {
       @page {
         size: A4 portrait;
-        margin: 10mm;
+        margin: 6mm;
       }
       body {
         background: white !important;
         padding: 0 !important;
         margin: 0 !important;
-        font-family: Arial, sans-serif !important;
         color: #000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
       .card, .container, .sheet-container, .btn-group { display: none !important; }
 
       #printArea {
-        display: block !important;
+        display: grid !important;
+        grid-template-columns: 240px 1fr;
+        gap: 15px;
         width: 100%;
         height: 100%;
         box-sizing: border-box;
+        position: relative;
+        background: #ffffff;
       }
 
-      .opr-header {
+      /* HYBRID DEKORASI BULATAN ATAS KIRI */
+      .circle-deco-1 {
+        position: absolute;
+        top: -60px;
+        left: -60px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        border: 12px solid #7e22ce;
+        background: #f0abfc;
+        z-index: 1;
+      }
+      .circle-deco-2 {
+        position: absolute;
+        top: 140px;
+        left: 170px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #581c87;
+        z-index: 1;
+      }
+
+      /* LAJUR KIRI */
+      .left-col {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 3px double #000;
-        padding-bottom: 8px;
-        margin-bottom: 12px;
+        flex-direction: column;
+        z-index: 2;
+        padding-top: 130px;
       }
 
-      .opr-header img { width: 70px; height: 70px; object-fit: contain; }
-      .opr-header-text { text-align: center; flex: 1; margin: 0 10px; }
-      .opr-header-text h2 { margin: 0; font-size: 14pt; font-weight: bold; text-transform: uppercase; }
-      .opr-header-text h3 { margin: 2px 0 0 0; font-size: 11pt; font-weight: bold; text-transform: uppercase; color: #1e3a8a; }
-      .opr-header-text p { margin: 2px 0 0 0; font-size: 9pt; }
-
-      .opr-title-box {
-        background: #f1f5f9;
-        border: 1px solid #000;
-        text-align: center;
-        padding: 6px;
-        font-weight: bold;
-        font-size: 11pt;
+      .opr-badge-title {
+        font-size: 16pt;
+        font-weight: 900;
+        color: #000;
         text-transform: uppercase;
         margin-bottom: 10px;
+        letter-spacing: 0.5px;
       }
 
-      .opr-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 10px;
-        font-size: 9.5pt;
-      }
-
-      .opr-table td, .opr-table th {
-        border: 1px solid #000;
-        padding: 5px 8px;
-        vertical-align: top;
-      }
-
-      .opr-table th {
-        background-color: #f1f5f9;
-        text-align: left;
-        width: 25%;
-        font-weight: bold;
-      }
-
-      .opr-section-header {
-        background-color: #1e3a8a;
-        color: white;
-        font-weight: bold;
-        padding: 4px 8px;
-        font-size: 9.5pt;
+      .info-label {
+        font-size: 8.5pt;
+        font-weight: 800;
+        color: #000;
         text-transform: uppercase;
-        margin-top: 8px;
-        margin-bottom: 4px;
-        -webkit-print-color-adjust: exact;
-      }
-
-      .opr-text-box {
-        border: 1px solid #000;
-        padding: 6px 8px;
-        font-size: 9pt;
-        min-height: 45px;
-        white-space: pre-line;
-        margin-bottom: 8px;
-      }
-
-      .opr-photos-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
         margin-top: 6px;
+        margin-bottom: 2px;
       }
 
-      .opr-photo-card {
-        border: 1px solid #000;
-        height: 140px;
+      .info-pill {
+        background-color: #f472b6 !important;
+        color: white !important;
+        padding: 5px 8px;
+        border-radius: 6px;
+        font-size: 8.5pt;
+        font-weight: 600;
+        margin-bottom: 4px;
+        word-break: break-word;
+      }
+
+      .left-photos {
+        margin-top: 15px;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        background: #fafafa;
+        flex-direction: column;
+        gap: 8px;
       }
 
-      .opr-photo-card img {
+      .photo-big {
+        width: 100%;
+        height: 130px;
+        background: #e2e8f0;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid #cbd5e1;
+      }
+
+      .photo-big img, .photo-small img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+
+      .photo-row-small {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+
+      .photo-small {
+        width: 100%;
+        height: 75px;
+        background: #e2e8f0;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid #cbd5e1;
+      }
+
+      /* LAJUR KANAN */
+      .right-col {
+        display: flex;
+        flex-direction: column;
+        z-index: 2;
+        padding-top: 10px;
+      }
+
+      .right-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+        margin-bottom: 10px;
+      }
+
+      .header-logos {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 4px;
+      }
+
+      .header-logos img {
+        height: 40px;
+        width: auto;
+      }
+
+      .school-name-text {
+        font-size: 11pt;
+        font-weight: 800;
+        color: #7e22ce;
+        text-transform: uppercase;
+      }
+
+      .program-main-title {
+        font-size: 16pt;
+        font-weight: 900;
+        color: #000;
+        text-align: right;
+        text-transform: uppercase;
+        margin-top: 5px;
+        margin-bottom: 12px;
+        line-height: 1.2;
+      }
+
+      .block-section {
+        margin-bottom: 10px;
+      }
+
+      .block-header {
+        font-size: 9.5pt;
+        font-weight: 800;
+        color: #000;
+        text-transform: uppercase;
+        margin-bottom: 3px;
+        text-align: center;
+        letter-spacing: 0.5px;
+      }
+
+      .block-content {
+        background-color: #c084fc !important;
+        color: white !important;
+        border-radius: 10px;
+        padding: 8px 12px;
+        font-size: 8.5pt;
+        line-height: 1.35;
+        min-height: 50px;
+        white-space: pre-line;
+      }
+
+      .opr-footer-sign {
+        margin-top: auto;
+        text-align: right;
+        font-size: 7.5pt;
+        color: #475569;
+        padding-top: 10px;
       }
     }
   </style>
@@ -265,7 +353,7 @@
     
     <!-- Pengepala Form Web -->
     <div class="header-banner">
-      <img src="logo.jpg" alt="Logo SK Simpang Rawai" class="school-logo">
+      <img src="logo.jpg" alt="Logo SK Simpang Rawai" class="school-logo-web">
       <h1>SK SIMPANG RAWAI</h1>
       <p>Sistem Pembangkit Laporan One Page Report (OPR)</p>
     </div>
@@ -284,12 +372,13 @@
           <input type="text" id="unit" placeholder="Contoh: Unit Hal Ehwal Murid (HEM)">
         </div>
         <div class="form-group">
-          <label>Tarikh:</label>
-          <input type="text" id="tarikh" placeholder="Contoh: 5 November 2026 (Khamis)">
+          <!-- PILIHAN TARIKH (DATE PICKER) -->
+          <label>Tarikh Program:</label>
+          <input type="date" id="tarikh" required>
         </div>
         <div class="form-group">
           <label>Masa:</label>
-          <input type="text" id="masa" placeholder="Contoh: 11.00 pagi - 12.30 tengah hari">
+          <input type="text" id="masa" placeholder="Contoh: 11.00 am - 12.30 pm">
         </div>
         <div class="form-group">
           <label>Tempat:</label>
@@ -312,27 +401,37 @@
         <button type="button" class="btn btn-ai" onclick="generateAI()">✨ AI Generate Objektif & Impak Ringkas</button>
       </div>
 
-      <div class="section-title">📝 Kandungan & Perincian Laporan</div>
+      <div class="section-title">📝 Perincian & Pengisian OPR</div>
 
       <div class="form-group">
         <label>Objektif Program:</label>
-        <textarea id="objektif" placeholder="Tuliskan objektif program atau gunakan bantuan AI di atas..."></textarea>
+        <textarea id="objektif" placeholder="Tuliskan objektif program atau jana secara automatik..."></textarea>
       </div>
 
       <div class="form-group">
-        <label>Impak Program / Penilaian:</label>
-        <textarea id="impak" placeholder="Tuliskan impak program atau gunakan bantuan AI di atas..."></textarea>
+        <label>Aktiviti Program:</label>
+        <textarea id="aktiviti" placeholder="Ringkaskan aktiviti yang dijalankan semasa program..."></textarea>
       </div>
 
       <div class="form-group">
-        <label>Muat Naik Gambar Aktiviti (Maksimum 4 Gambar):</label>
+        <label>Impak Program:</label>
+        <textarea id="impak" placeholder="Tuliskan hasil/impak program..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Cadangan Penambahbaikan:</label>
+        <textarea id="penambahbaikan" placeholder="Tuliskan cadangan penambahbaikan untuk masa akan datang..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Muat Naik Gambar Aktiviti (Maksimum 3 Gambar):</label>
         <input type="file" id="gambarInput" accept="image/*" multiple onchange="processImages()">
         <div id="preview" class="preview-grid"></div>
       </div>
 
       <div class="btn-group">
         <button type="button" class="btn btn-submit" id="btnSimpan" onclick="simpanKeSheets()">💾 Simpan Rekod ke Drive & Sheets</button>
-        <button type="button" class="btn btn-print" onclick="prepareAndPrint()">🖨️ Cetak Laporan OPR / Simpan PDF (1 Page A4)</button>
+        <button type="button" class="btn btn-print" onclick="prepareAndPrint()">🖨️ Cetak / Simpan PDF OPR (Format Poster A4)</button>
       </div>
     </form>
 
@@ -346,54 +445,80 @@
 </div>
 
 <!-- =========================================================
-     RUANGAN HASIL CETAKAN RASMI A4 (POPULATED VIA JAVASCRIPT)
+     RUANGAN LAYOUT FORMAT CETAKAN POSTER A4 (BERDASARKAN CONTOH)
      ========================================================= -->
 <div id="printArea">
-  <div class="opr-header">
-    <img src="logo.jpg" alt="Logo Sekolah">
-    <div class="opr-header-text">
-      <h2>SEKOLAH KEBANGSAAN SIMPANG RAWAI</h2>
-      <h3>LAPORAN ONE PAGE REPORT (OPR)</h3>
-      <p>Kuala Terengganu, Terengganu Darul Iman</p>
+  <div class="circle-deco-1"></div>
+  <div class="circle-deco-2"></div>
+
+  <!-- LAJUR KIRI -->
+  <div class="left-col">
+    <div class="opr-badge-title">ONE PAGE REPORT</div>
+
+    <div class="info-label">TARIKH</div>
+    <div class="info-pill" id="pTarikh">-</div>
+
+    <div class="info-label">MASA</div>
+    <div class="info-pill" id="pMasa">-</div>
+
+    <div class="info-label">TEMPAT</div>
+    <div class="info-pill" id="pTempat">-</div>
+
+    <div class="info-label">ANJURAN</div>
+    <div class="info-pill" id="pUnit">-</div>
+
+    <div class="info-label">SASARAN</div>
+    <div class="info-pill" id="pSasaran">-</div>
+
+    <div class="left-photos">
+      <div class="photo-big" id="photoBig">
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:8pt;">[ Gambar 1 ]</div>
+      </div>
+      <div class="photo-row-small">
+        <div class="photo-small" id="photoSmall1">
+          <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">[ Gambar 2 ]</div>
+        </div>
+        <div class="photo-small" id="photoSmall2">
+          <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">[ Gambar 3 ]</div>
+        </div>
+      </div>
     </div>
-    <div style="width:70px;"></div> <!-- Pengimbang Header -->
   </div>
 
-  <div class="opr-title-box" id="pTajuk">TAJUK PROGRAM</div>
+  <!-- LAJUR KANAN -->
+  <div class="right-col">
+    <div class="right-header">
+      <div class="header-logos">
+        <img src="logo.jpg" alt="Logo SK Simpang Rawai">
+      </div>
+      <div class="school-name-text">SEKOLAH KEBANGSAAN SIMPANG RAWAI</div>
+    </div>
 
-  <table class="opr-table">
-    <tr>
-      <th>UNIT / ANJURAN</th>
-      <td id="pUnit">-</td>
-      <th>TARIKH</th>
-      <td id="pTarikh">-</td>
-    </tr>
-    <tr>
-      <th>MASA</th>
-      <td id="pMasa">-</td>
-      <th>TEMPAT</th>
-      <td id="pTempat">-</td>
-    </tr>
-    <tr>
-      <th>SASARAN</th>
-      <td id="pSasaran">-</td>
-      <th>JEMPUTAN</th>
-      <td id="pJemputan">-</td>
-    </tr>
-  </table>
+    <div class="program-main-title" id="pTajuk">PELANCARAN PROGRAM & AKTIVITI SEKOLAH</div>
 
-  <div class="opr-section-header">1. OBJEKTIF PROGRAM</div>
-  <div class="opr-text-box" id="pObjektif">-</div>
+    <div class="block-section">
+      <div class="block-header">OBJEKTIF PROGRAM</div>
+      <div class="block-content" id="pObjektif">-</div>
+    </div>
 
-  <div class="opr-section-header">2. IMPAK & PENILAIAN PROGRAM</div>
-  <div class="opr-text-box" id="pImpak">-</div>
+    <div class="block-section">
+      <div class="block-header">AKTIVITI PROGRAM</div>
+      <div class="block-content" id="pAktiviti">-</div>
+    </div>
 
-  <div class="opr-section-header">3. RAKAMAN GAMBAR AKTIVITI</div>
-  <div class="opr-photos-grid" id="pPhotosGrid">
-    <div class="opr-photo-card"><span>[ Tiada Gambar ]</span></div>
-    <div class="opr-photo-card"><span>[ Tiada Gambar ]</span></div>
-    <div class="opr-photo-card"><span>[ Tiada Gambar ]</span></div>
-    <div class="opr-photo-card"><span>[ Tiada Gambar ]</span></div>
+    <div class="block-section">
+      <div class="block-header">IMPAK PROGRAM</div>
+      <div class="block-content" id="pImpak">-</div>
+    </div>
+
+    <div class="block-section">
+      <div class="block-header">CADANGAN PENAMBAHBAIKAN</div>
+      <div class="block-content" id="pPenambahbaikan">-</div>
+    </div>
+
+    <div class="opr-footer-sign">
+      Disediakan oleh: <strong>SK Simpang Rawai</strong>
+    </div>
   </div>
 </div>
 
@@ -402,7 +527,7 @@
   let compressedImages = [];
 
   function processImages() {
-    const files = Array.from(document.getElementById('gambarInput').files).slice(0, 4);
+    const files = Array.from(document.getElementById('gambarInput').files).slice(0, 3);
     const container = document.getElementById('preview');
     container.innerHTML = '';
     compressedImages = [];
@@ -453,10 +578,12 @@
       return;
     }
 
-    document.getElementById("objektif").value = `1. Memberi kesedaran dan pemahaman jelas berkaitan ${tajuk}.\n2. Memupuk nilai murni, sahsiah terpuji, dan disiplin dalam kalangan ${sasaran}.\n3. Mewujudkan persekitaran sekolah yang selamat, kondusif, dan harmoni.`;
-    document.getElementById("impak").value = `Program ini berjaya meningkatkan tahap kesedaran ${sasaran} serta memberi impak positif terhadap pembentukan sahsiah dan disiplin murid secara menyeluruh.`;
+    document.getElementById("objektif").value = `• Meningkatkan kesedaran dan pemahaman peserta berkaitan ${tajuk}.\n• Memupuk nilai murni dan penglibatan aktif dalam kalangan ${sasaran}.\n• Mewujudkan persekitaran sekolah yang bermaklumat dan berdisiplin.`;
+    document.getElementById("aktiviti").value = `• Sesi ceramah / perasmian ringkas program.\n• Aktiviti interaktif dan penyampaian maklumat kepada ${sasaran}.\n• Dokumentasi dan penilaian sepanjang program berlangsung.`;
+    document.getElementById("impak").value = `• Murid lebih bersemangat dan memahami objektif utama program.\n• Pembentukan sahsiah diri yang lebih positif dalam kalangan peserta.\n• Budaya kerja berpasukan berjaya dipupuk secara berterusan.`;
+    document.getElementById("penambahbaikan").value = `• Menyusun jadual aktiviti dengan lebih fleksibel mengikut kesesuaian masa.\n• Menyediakan lebih banyak bahan edaran dan media visual yang menarik.\n• Meningkatkan penglibatan serta kerjasama pelbagai pihak pada masa akan datang.`;
     
-    alert("✨ AI berjaya menjana cadangan Objektif & Impak ringkas!");
+    alert("✨ AI berjaya menjana cadangan Objektif, Aktiviti, Impak & Penambahbaikan!");
   }
 
   async function simpanKeSheets() {
@@ -464,10 +591,18 @@
     btn.disabled = true;
     btn.innerText = "⏳ Memproses & Menghantar...";
 
+    // Tukar format tarikh untuk disimpan
+    let rawDate = document.getElementById("tarikh").value;
+    let formattedDate = rawDate;
+    if (rawDate) {
+      const d = new Date(rawDate);
+      formattedDate = d.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
     const payload = {
       tajuk: document.getElementById("tajuk").value,
       unit: document.getElementById("unit").value,
-      tarikh: document.getElementById("tarikh").value,
+      tarikh: formattedDate,
       masa: document.getElementById("masa").value,
       tempat: document.getElementById("tempat").value,
       sasaran: document.getElementById("sasaran").value,
@@ -493,43 +628,48 @@
     }
   }
 
-  // Fungsi Menyediakan Format A4 Cetakan Rasmi
+  // Formatkan Pilihan Tarikh dan Muatkan ke Cetakan Poster
   function prepareAndPrint() {
-    document.getElementById('pTajuk').innerText = document.getElementById('tajuk').value || "LAPORAN PROGRAM SEKOLAH";
+    let rawDate = document.getElementById('tarikh').value;
+    let displayDate = "-";
+    if (rawDate) {
+      const d = new Date(rawDate);
+      displayDate = d.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    document.getElementById('pTajuk').innerText = document.getElementById('tajuk').value || "TAJUK PROGRAM";
     document.getElementById('pUnit').innerText = document.getElementById('unit').value || "-";
-    document.getElementById('pTarikh').innerText = document.getElementById('tarikh').value || "-";
+    document.getElementById('pTarikh').innerText = displayDate;
     document.getElementById('pMasa').innerText = document.getElementById('masa').value || "-";
     document.getElementById('pTempat').innerText = document.getElementById('tempat').value || "-";
     document.getElementById('pSasaran').innerText = document.getElementById('sasaran').value || "-";
-    document.getElementById('pJemputan').innerText = document.getElementById('jemputan').value || "-";
-    
-    document.getElementById('pObjektif').innerText = document.getElementById('objektif').value || "Tiada Maklumat";
-    document.getElementById('pImpak').innerText = document.getElementById('impak').value || "Tiada Maklumat";
 
-    const photosGrid = document.getElementById('pPhotosGrid');
-    photosGrid.innerHTML = '';
+    document.getElementById('pObjektif').innerText = document.getElementById('objektif').value || "-";
+    document.getElementById('pAktiviti').innerText = document.getElementById('aktiviti').value || "-";
+    document.getElementById('pImpak').innerText = document.getElementById('impak').value || "-";
+    document.getElementById('pPenambahbaikan').innerText = document.getElementById('penambahbaikan').value || "-";
+
+    // Kemaskini Gambar Pada Cetakan Poster
+    const photoBig = document.getElementById('photoBig');
+    const photoSmall1 = document.getElementById('photoSmall1');
+    const photoSmall2 = document.getElementById('photoSmall2');
 
     if (compressedImages.length > 0) {
-      compressedImages.forEach(imgData => {
-        const div = document.createElement('div');
-        div.className = 'opr-photo-card';
-        div.innerHTML = `<img src="${imgData}" alt="Gambar Aktiviti">`;
-        photosGrid.appendChild(div);
-      });
-      // Isikan petak kosong jika kurang daripada 4 gambar
-      for (let i = compressedImages.length; i < 4; i++) {
-        const div = document.createElement('div');
-        div.className = 'opr-photo-card';
-        div.innerHTML = `<span>[ Ruang Gambar ${i+1} ]</span>`;
-        photosGrid.appendChild(div);
-      }
+      photoBig.innerHTML = `<img src="${compressedImages[0]}" alt="Gambar Utama">`;
     } else {
-      for (let i = 0; i < 4; i++) {
-        const div = document.createElement('div');
-        div.className = 'opr-photo-card';
-        div.innerHTML = `<span>[ Ruang Gambar ${i+1} ]</span>`;
-        photosGrid.appendChild(div);
-      }
+      photoBig.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:8pt;">[ Gambar Utama ]</div>`;
+    }
+
+    if (compressedImages.length > 1) {
+      photoSmall1.innerHTML = `<img src="${compressedImages[1]}" alt="Gambar 2">`;
+    } else {
+      photoSmall1.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">[ Gambar 2 ]</div>`;
+    }
+
+    if (compressedImages.length > 2) {
+      photoSmall2.innerHTML = `<img src="${compressedImages[2]}" alt="Gambar 3">`;
+    } else {
+      photoSmall2.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">[ Gambar 3 ]</div>`;
     }
 
     window.print();
