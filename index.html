@@ -9,8 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #9333ea;
+      --primary: #1e3a8a;
       --secondary: #0f172a;
+      --accent: #7c3aed;
+      --success: #059669;
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --border: #cbd5e1;
@@ -26,7 +28,7 @@
     }
 
     .container {
-      max-width: 750px;
+      max-width: 780px;
       margin: 0 auto;
     }
 
@@ -39,7 +41,7 @@
     }
 
     .header-banner {
-      background: linear-gradient(135deg, #7e22ce 0%, #3b0764 100%);
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
       border-radius: 12px;
       padding: 20px;
       text-align: center;
@@ -59,7 +61,7 @@
     }
 
     .header-banner h1 { font-size: 1.3rem; margin: 0; font-weight: 800; }
-    .header-banner p { font-size: 0.85rem; margin: 4px 0 0 0; color: #f3e8ff; }
+    .header-banner p { font-size: 0.85rem; margin: 4px 0 0 0; color: #cbd5e1; }
 
     .section-title {
       font-size: 0.9rem;
@@ -114,9 +116,9 @@
       gap: 6px;
     }
 
-    .btn-ai { background: #7e22ce; color: white; }
-    .btn-submit { background: #059669; color: white; }
-    .btn-print { background: #2563eb; color: white; }
+    .btn-ai { background: var(--accent); color: white; }
+    .btn-submit { background: var(--success); color: white; }
+    .btn-print { background: var(--primary); color: white; }
 
     .preview-grid {
       display: grid;
@@ -137,15 +139,16 @@
     iframe { width: 100%; height: 350px; border: 1.5px solid var(--border); border-radius: 8px; }
 
     /* =========================================================
-       FORMAT LAYOUT A4 CETAKAN MODEN (4 GAMBAR + 1 PAGE FIT)
+       REKA BENTUK FULL A4 CETAKAN / PDF (100% PAGE UTILIZATION)
        ========================================================= */
     #printArea { display: none; }
 
     @media print {
       @page {
         size: A4 portrait;
-        margin: 4mm;
+        margin: 6mm;
       }
+      
       body {
         background: white !important;
         padding: 0 !important;
@@ -154,175 +157,195 @@
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
+      
       .card, .container, .sheet-container, .btn-group { display: none !important; }
 
       #printArea {
-        display: grid !important;
-        grid-template-columns: 210px 1fr;
-        gap: 12px;
-        width: 100%;
-        height: 100vh;
-        box-sizing: border-box;
-        position: relative;
-        background: #ffffff;
-        overflow: hidden;
-      }
-
-      /* HYBRID DEKORASI BULATAN */
-      .circle-deco-1 {
-        position: absolute;
-        top: -50px;
-        left: -50px;
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        border: 10px solid #7e22ce;
-        background: #f0abfc;
-        z-index: 1;
-      }
-      .circle-deco-2 {
-        position: absolute;
-        top: 110px;
-        left: 145px;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: #581c87;
-        z-index: 1;
-      }
-
-      /* LAJUR KIRI */
-      .left-col {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
-        z-index: 2;
-        padding-top: 100px;
+        justify-content: space-between;
+        width: 100%;
+        height: 280mm; /* Mengisi penuh 1 Muka Surat A4 */
+        box-sizing: border-box;
+        padding: 6mm;
+        background: #ffffff;
       }
 
-      .opr-badge-title {
-        font-size: 13pt;
-        font-weight: 900;
-        color: #000;
+      /* Header Rasmi OPR */
+      .opr-header-container {
+        display: flex;
+        align-items: center;
+        border-bottom: 3px solid #1e3a8a;
+        padding-bottom: 8px;
+        margin-bottom: 8px;
+      }
+
+      .opr-header-logo {
+        width: 65px;
+        height: 65px;
+        object-fit: contain;
+        margin-right: 12px;
+      }
+
+      .opr-header-details { flex: 1; }
+      .opr-header-details h2 { margin: 0; font-size: 13pt; font-weight: 800; color: #1e3a8a; text-transform: uppercase; }
+      .opr-header-details h3 { margin: 2px 0 0 0; font-size: 10pt; font-weight: 700; color: #0f172a; text-transform: uppercase; }
+      .opr-header-details p { margin: 2px 0 0 0; font-size: 8pt; color: #475569; }
+
+      /* Spanduk Tajuk Program */
+      .opr-program-banner {
+        background: #1e3a8a !important;
+        color: #ffffff !important;
+        text-align: center;
+        padding: 8px 12px;
+        font-size: 12pt;
+        font-weight: 800;
         text-transform: uppercase;
-        margin-bottom: 6px;
+        border-radius: 6px;
+        margin-bottom: 10px;
         letter-spacing: 0.5px;
       }
 
-      .info-label {
-        font-size: 7.5pt;
-        font-weight: 800;
-        color: #000;
-        text-transform: uppercase;
-        margin-top: 4px;
-        margin-bottom: 1px;
+      /* Badan Laporan (2 Lajur Kiri & Kanan) */
+      .opr-body-grid {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 12px;
+        flex: 1; /* Mengisi penuh ruang tengah A4 */
       }
 
-      .info-pill {
-        background-color: #ec4899 !important;
-        color: white !important;
-        padding: 4px 6px;
-        border-radius: 5px;
+      /* Lajur Kiri (Metadata & Gambar) */
+      .opr-left-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .opr-meta-box {
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 8px;
+        margin-bottom: 10px;
+      }
+
+      .meta-item {
+        margin-bottom: 6px;
+      }
+      .meta-item:last-child { margin-bottom: 0; }
+
+      .meta-title {
         font-size: 7.5pt;
+        font-weight: 800;
+        color: #1e3a8a;
+        text-transform: uppercase;
+      }
+
+      .meta-value {
+        font-size: 8.5pt;
         font-weight: 600;
-        margin-bottom: 2px;
+        color: #0f172a;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px;
+        padding: 4px 6px;
+        margin-top: 2px;
         word-break: break-word;
       }
 
-      /* GRID 4 GAMBAR AKTIVITI (2x2) */
-      .left-photos-grid {
-        margin-top: 10px;
+      /* Grid 4 Gambar Aktiviti (2x2) */
+      .opr-photos-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .opr-photos-title {
+        font-size: 8pt;
+        font-weight: 800;
+        color: #1e3a8a;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .opr-photos-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 5px;
+        grid-template-rows: 1fr 1fr;
+        gap: 6px;
+        flex: 1;
       }
 
-      .photo-box {
+      .photo-frame {
         width: 100%;
-        height: 75px;
+        height: 100%;
+        min-height: 90px;
         background: #f1f5f9;
-        border-radius: 5px;
-        overflow: hidden;
         border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .photo-box img {
+      .photo-frame img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
 
-      /* LAJUR KANAN */
-      .right-col {
+      /* Lajur Kanan (Blok Teks Utama) */
+      .opr-right-column {
         display: flex;
         flex-direction: column;
-        z-index: 2;
-        padding-top: 4px;
+        justify-content: space-between;
       }
 
-      .right-header {
+      .opr-content-block {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        text-align: right;
-        margin-bottom: 4px;
-      }
-
-      .header-logos img {
-        height: 38px;
-        width: auto;
-      }
-
-      .school-name-text {
-        font-size: 10pt;
-        font-weight: 800;
-        color: #7e22ce;
-        text-transform: uppercase;
-      }
-
-      .program-main-title {
-        font-size: 13pt;
-        font-weight: 900;
-        color: #000;
-        text-align: right;
-        text-transform: uppercase;
-        margin-top: 2px;
         margin-bottom: 8px;
-        line-height: 1.15;
       }
+      .opr-content-block:last-child { margin-bottom: 0; }
 
-      .block-section {
-        margin-bottom: 6px;
-      }
-
-      .block-header {
+      .block-title {
+        background: #e2e8f0 !important;
+        color: #1e3a8a !important;
         font-size: 8.5pt;
         font-weight: 800;
-        color: #000;
+        padding: 4px 8px;
+        border-left: 4px solid #1e3a8a;
         text-transform: uppercase;
-        margin-bottom: 2px;
-        text-align: center;
-        letter-spacing: 0.4px;
+        margin-bottom: 3px;
       }
 
-      .block-content {
-        background-color: #c084fc !important;
-        color: white !important;
-        border-radius: 8px;
-        padding: 6px 10px;
-        font-size: 7.8pt;
-        line-height: 1.25;
-        min-height: 42px;
+      .block-text {
+        flex: 1;
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 0 0 6px 6px;
+        padding: 6px 8px;
+        font-size: 8.2pt;
+        line-height: 1.3;
         white-space: pre-line;
+        color: #0f172a;
       }
 
-      .opr-footer-sign {
-        margin-top: auto;
-        text-align: right;
-        font-size: 7.5pt;
-        color: #0f172a;
-        padding-top: 4px;
-        border-top: 1px solid #e2e8f0;
+      /* Kaki Laporan & Pengesahan */
+      .opr-footer {
+        border-top: 2px solid #1e3a8a;
+        padding-top: 6px;
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 8pt;
       }
+
+      .opr-footer-left { color: #64748b; font-weight: 500; }
+      .opr-footer-right { font-weight: 700; color: #0f172a; text-align: right; }
     }
   </style>
 </head>
@@ -388,12 +411,12 @@
       </div>
 
       <div class="form-group">
-        <label>Aktiviti Program:</label>
+        <label>Ringkasan Aktiviti Program:</label>
         <textarea id="aktiviti" placeholder="Ringkaskan aktiviti yang dijalankan semasa program..."></textarea>
       </div>
 
       <div class="form-group">
-        <label>Impak Program:</label>
+        <label>Impak / Hasil Program:</label>
         <textarea id="impak" placeholder="Tuliskan hasil/impak program..."></textarea>
       </div>
 
@@ -403,14 +426,14 @@
       </div>
 
       <div class="form-group">
-        <label>Muat Naik Gambar Aktiviti (Maksimum 4 Gambar):</label>
+        <label>Muat Naik Gambar Aktiviti (Sehingga 4 Gambar):</label>
         <input type="file" id="gambarInput" accept="image/*" multiple onchange="processImages()">
         <div id="preview" class="preview-grid"></div>
       </div>
 
       <div class="btn-group">
         <button type="button" class="btn btn-submit" id="btnSimpan" onclick="simpanKeSheets()">💾 Simpan Rekod ke Drive & Sheets</button>
-        <button type="button" class="btn btn-print" onclick="prepareAndPrint()">🖨️ Cetak / Simpan PDF OPR (Format A4)</button>
+        <button type="button" class="btn btn-print" onclick="prepareAndPrint()">🖨️ Cetak Laporan OPR / Simpan PDF (1 Page Full A4)</button>
       </div>
     </form>
 
@@ -424,74 +447,95 @@
 </div>
 
 <!-- =========================================================
-     RUANGAN LAYOUT FORMAT CETAKAN POSTER A4 (4 GAMBAR & NAMA GURU)
+     RUANGAN HASIL CETAKAN RASMI FULL A4 (PRINT LAYOUT)
      ========================================================= -->
 <div id="printArea">
-  <div class="circle-deco-1"></div>
-  <div class="circle-deco-2"></div>
-
-  <!-- LAJUR KIRI -->
-  <div class="left-col">
-    <div class="opr-badge-title">ONE PAGE REPORT</div>
-
-    <div class="info-label">TARIKH</div>
-    <div class="info-pill" id="pTarikh">-</div>
-
-    <div class="info-label">MASA</div>
-    <div class="info-pill" id="pMasa">-</div>
-
-    <div class="info-label">TEMPAT</div>
-    <div class="info-pill" id="pTempat">-</div>
-
-    <div class="info-label">ANJURAN</div>
-    <div class="info-pill" id="pUnit">-</div>
-
-    <div class="info-label">SASARAN</div>
-    <div class="info-pill" id="pSasaran">-</div>
-
-    <div class="left-photos-grid" id="pPhotosGrid">
-      <div class="photo-box"><div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">Gambar 1</div></div>
-      <div class="photo-box"><div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">Gambar 2</div></div>
-      <div class="photo-box"><div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">Gambar 3</div></div>
-      <div class="photo-box"><div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">Gambar 4</div></div>
+  
+  <!-- Header Cetakan -->
+  <div class="opr-header-container">
+    <img src="logo.jpg" alt="Logo SK Simpang Rawai" class="opr-header-logo">
+    <div class="opr-header-details">
+      <h2>SEKOLAH KEBANGSAAN SIMPANG RAWAI</h2>
+      <h3>DOKUMENTASI ONE PAGE REPORT (OPR)</h3>
+      <p>Kuala Terengganu, Terengganu Darul Iman</p>
     </div>
   </div>
 
-  <!-- LAJUR KANAN -->
-  <div class="right-col">
-    <div class="right-header">
-      <div class="header-logos">
-        <img src="logo.jpg" alt="Logo SK Simpang Rawai">
+  <!-- Banner Tajuk -->
+  <div class="opr-program-banner" id="pTajuk">TAJUK PROGRAM / AKTIVITI</div>
+
+  <!-- Badan Laporan 2 Lajur -->
+  <div class="opr-body-grid">
+    
+    <!-- Lajur Kiri: Maklumat & Gambar -->
+    <div class="opr-left-column">
+      <div class="opr-meta-box">
+        <div class="meta-item">
+          <div class="meta-title">📅 TARIKH</div>
+          <div class="meta-value" id="pTarikh">-</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-title">⏰ MASA</div>
+          <div class="meta-value" id="pMasa">-</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-title">📍 TEMPAT</div>
+          <div class="meta-value" id="pTempat">-</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-title">🏛️ ANJURAN</div>
+          <div class="meta-value" id="pUnit">-</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-title">🎯 SASARAN</div>
+          <div class="meta-value" id="pSasaran">-</div>
+        </div>
       </div>
-      <div class="school-name-text">SEKOLAH KEBANGSAAN SIMPANG RAWAI</div>
+
+      <div class="opr-photos-wrapper">
+        <div class="opr-photos-title">🖼️ RAKAMAN GAMBAR AKTIVITI</div>
+        <div class="opr-photos-grid" id="pPhotosGrid">
+          <div class="photo-frame"><span style="font-size:7pt;color:#94a3b8;">Gambar 1</span></div>
+          <div class="photo-frame"><span style="font-size:7pt;color:#94a3b8;">Gambar 2</span></div>
+          <div class="photo-frame"><span style="font-size:7pt;color:#94a3b8;">Gambar 3</span></div>
+          <div class="photo-frame"><span style="font-size:7pt;color:#94a3b8;">Gambar 4</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="program-main-title" id="pTajuk">TAJUK PROGRAM / AKTIVITI</div>
+    <!-- Lajur Kanan: Blok Teks Kandungan Utama -->
+    <div class="opr-right-column">
+      
+      <div class="opr-content-block">
+        <div class="block-title">1. OBJEKTIF PROGRAM</div>
+        <div class="block-text" id="pObjektif">-</div>
+      </div>
 
-    <div class="block-section">
-      <div class="block-header">OBJEKTIF PROGRAM</div>
-      <div class="block-content" id="pObjektif">-</div>
+      <div class="opr-content-block">
+        <div class="block-title">2. RINGKASAN AKTIVITI PROGRAM</div>
+        <div class="block-text" id="pAktiviti">-</div>
+      </div>
+
+      <div class="opr-content-block">
+        <div class="block-title">3. IMPAK / HASIL PROGRAM</div>
+        <div class="block-text" id="pImpak">-</div>
+      </div>
+
+      <div class="opr-content-block">
+        <div class="block-title">4. CADANGAN PENAMBAHBAIKAN</div>
+        <div class="block-text" id="pPenambahbaikan">-</div>
+      </div>
+
     </div>
 
-    <div class="block-section">
-      <div class="block-header">AKTIVITI PROGRAM</div>
-      <div class="block-content" id="pAktiviti">-</div>
-    </div>
-
-    <div class="block-section">
-      <div class="block-header">IMPAK PROGRAM</div>
-      <div class="block-content" id="pImpak">-</div>
-    </div>
-
-    <div class="block-section">
-      <div class="block-header">CADANGAN PENAMBAHBAIKAN</div>
-      <div class="block-content" id="pPenambahbaikan">-</div>
-    </div>
-
-    <div class="opr-footer-sign">
-      Disediakan oleh: <strong id="pPenyedia">Nama Guru</strong> | SK Simpang Rawai
-    </div>
   </div>
+
+  <!-- Kaki Laporan & Pengesahan -->
+  <div class="opr-footer">
+    <div class="opr-footer-left">SK Simpang Rawai | Laporan Rasmi Program</div>
+    <div class="opr-footer-right">Disediakan oleh: <span id="pPenyedia" style="text-decoration:underline;">-</span></div>
+  </div>
+
 </div>
 
 <script>
@@ -550,10 +594,10 @@
       return;
     }
 
-    document.getElementById("objektif").value = `• Meningkatkan kesedaran dan pemahaman peserta berkaitan ${tajuk}.\n• Memupuk nilai murni dan penglibatan aktif dalam kalangan ${sasaran}.\n• Mewujudkan persekitaran sekolah yang bermaklumat dan berdisiplin.`;
-    document.getElementById("aktiviti").value = `• Sesi ceramah / perasmian ringkas program.\n• Aktiviti interaktif dan penyampaian maklumat kepada ${sasaran}.\n• Dokumentasi dan penilaian sepanjang program berlangsung.`;
-    document.getElementById("impak").value = `• Murid lebih bersemangat dan memahami objektif utama program.\n• Pembentukan sahsiah diri yang lebih positif dalam kalangan peserta.\n• Budaya kerja berpasukan berjaya dipupuk secara berterusan.`;
-    document.getElementById("penambahbaikan").value = `• Menyusun jadual aktiviti dengan lebih fleksibel mengikut kesesuaian masa.\n• Menyediakan lebih banyak bahan edaran dan media visual yang menarik.\n• Meningkatkan penglibatan serta kerjasama pelbagai pihak pada masa akan datang.`;
+    document.getElementById("objektif").value = `1. Meningkatkan kesedaran dan pemahaman peserta berkaitan ${tajuk}.\n2. Memupuk nilai murni dan penglibatan aktif dalam kalangan ${sasaran}.\n3. Mewujudkan persekitaran sekolah yang bermaklumat, kondusif, dan berdisiplin.`;
+    document.getElementById("aktiviti").value = `1. Perasmian ringkas dan ucapan aluan penganjur.\n2. Sesi ceramah / penyampaian slot utama berkaitan ${tajuk} kepada ${sasaran}.\n3. Penilaian program dan penyerahan sijil/cenderamata.`;
+    document.getElementById("impak").value = `1. Peserta memberi respon amat positif dan memahami objektif utama program.\n2. Pembentukan sahsiah diri dan semangat berpasukan dalam kalangan ${sasaran}.\n3. Program berjalan dengan lancar dan mencapai sasaran yang ditetapkan.`;
+    document.getElementById("penambahbaikan").value = `1. Menyusun jadual aktiviti dengan lebih fleksibel mengikut kesesuaian masa sekolah.\n2. Menyediakan bahan edaran dan media visual interaktif pada masa akan datang.\n3. Meningkatkan penglibatan serta kerjasama pelbagai pihak luar.`;
     
     alert("✨ AI berjaya menjana cadangan Objektif, Aktiviti, Impak & Penambahbaikan!");
   }
@@ -607,7 +651,7 @@
       displayDate = d.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
     }
 
-    document.getElementById('pTajuk').innerText = document.getElementById('tajuk').value || "TAJUK PROGRAM";
+    document.getElementById('pTajuk').innerText = document.getElementById('tajuk').value || "TAJUK PROGRAM / AKTIVITI";
     document.getElementById('pUnit').innerText = document.getElementById('unit').value || "-";
     document.getElementById('pTarikh').innerText = displayDate;
     document.getElementById('pMasa').innerText = document.getElementById('masa').value || "-";
@@ -626,11 +670,11 @@
 
     for (let i = 0; i < 4; i++) {
       const box = document.createElement('div');
-      box.className = 'photo-box';
+      box.className = 'photo-frame';
       if (compressedImages[i]) {
         box.innerHTML = `<img src="${compressedImages[i]}" alt="Gambar ${i+1}">`;
       } else {
-        box.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">Gambar ${i+1}</div>`;
+        box.innerHTML = `<span style="font-size:7pt;color:#94a3b8;">Gambar ${i+1}</span>`;
       }
       pGrid.appendChild(box);
     }
