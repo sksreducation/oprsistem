@@ -9,12 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
+      --primary: #1e3a8a;
       --secondary: #0f172a;
-      --accent: #7c3aed;
+      --accent: #6d28d9;
       --success: #059669;
-      --bg: #f1f5f9;
+      --bg: #f8fafc;
       --card-bg: #ffffff;
       --border: #cbd5e1;
     }
@@ -23,78 +22,56 @@
 
     body {
       background-color: var(--bg);
-      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-      background-size: 20px 20px;
       color: var(--secondary);
       margin: 0;
       padding: 16px;
     }
 
     .container {
-      max-width: 680px;
+      max-width: 750px;
       margin: 0 auto;
     }
 
-    /* Kad Utama & Header */
     .card {
       background: var(--card-bg);
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.01);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
       border: 1px solid #e2e8f0;
     }
 
     .header-banner {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      border-radius: 16px;
-      padding: 24px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+      border-radius: 12px;
+      padding: 20px;
       text-align: center;
       color: white;
-      margin-bottom: 24px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.3);
+      margin-bottom: 20px;
     }
 
     .school-logo {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       object-fit: contain;
       background: white;
       border-radius: 50%;
-      padding: 6px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      margin-bottom: 12px;
-      border: 3px solid #facc15;
+      padding: 4px;
+      margin-bottom: 8px;
+      border: 2px solid #facc15;
     }
 
-    .header-banner h1 {
-      font-size: 1.35rem;
-      margin: 0;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      color: #f8fafc;
-    }
+    .header-banner h1 { font-size: 1.3rem; margin: 0; font-weight: 800; }
+    .header-banner p { font-size: 0.85rem; margin: 4px 0 0 0; color: #cbd5e1; }
 
-    .header-banner p {
-      font-size: 0.85rem;
-      margin: 6px 0 0 0;
-      color: #94a3b8;
-      font-weight: 500;
-    }
-
-    /* Borang Input & Grid */
     .section-title {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--primary);
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-top: 20px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      margin-top: 16px;
+      margin-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 4px;
     }
 
     .form-grid {
@@ -103,100 +80,181 @@
       gap: 12px;
     }
 
-    .form-group { margin-bottom: 14px; }
+    .form-group { margin-bottom: 12px; }
     .form-group.full { grid-column: span 2; }
 
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 6px;
-      font-size: 0.82rem;
-      color: #475569;
-    }
+    label { font-weight: 600; display: block; margin-bottom: 4px; font-size: 0.82rem; color: #475569; }
 
     input, textarea {
       width: 100%;
-      padding: 12px 14px;
+      padding: 10px 12px;
       border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.92rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
       background-color: #f8fafc;
-      transition: all 0.2s ease;
-      color: var(--secondary);
     }
 
     input:focus, textarea:focus {
       outline: none;
       border-color: var(--primary);
       background-color: #fff;
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
     }
 
-    textarea { height: 85px; resize: vertical; }
+    textarea { height: 75px; resize: vertical; }
 
-    /* Butang Operasi */
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
-    }
+    .btn-group { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
 
     .btn {
       width: 100%;
-      padding: 14px;
+      padding: 12px;
       border: none;
-      border-radius: 12px;
+      border-radius: 8px;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: all 0.2s ease;
+      gap: 6px;
     }
 
-    .btn:active { transform: scale(0.98); }
-    .btn-ai { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color: white; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25); }
-    .btn-submit { background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25); }
-    .btn-print { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: white; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-ai { background: var(--accent); color: white; }
+    .btn-submit { background: var(--success); color: white; }
+    .btn-print { background: var(--primary); color: white; }
 
-    /* Gambar Preview Grid */
     .preview-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 10px;
+      gap: 8px;
+      margin-top: 8px;
     }
 
     .preview-img {
       width: 100%;
-      height: 100px;
+      height: 90px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 6px;
       border: 1px solid var(--border);
     }
 
-    /* Live Google Sheet View */
-    .sheet-container {
-      margin-top: 30px;
-      border-top: 2px dashed #e2e8f0;
-      padding-top: 20px;
-    }
+    .sheet-container { margin-top: 24px; border-top: 2px dashed #e2e8f0; padding-top: 16px; }
+    iframe { width: 100%; height: 350px; border: 1.5px solid var(--border); border-radius: 8px; }
 
-    iframe {
-      width: 100%;
-      height: 380px;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      background: white;
-    }
+    /* =========================================================
+       FORMAT LAYOUT KHAS CETAKAN / PDF A4 (1 MUKA SURAT RASMI)
+       ========================================================= */
+    #printArea { display: none; }
 
-    @media (max-width: 500px) {
-      .form-grid { grid-template-columns: 1fr; }
-      .form-group.full { grid-column: span 1; }
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm;
+      }
+      body {
+        background: white !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-family: Arial, sans-serif !important;
+        color: #000 !important;
+      }
+      .card, .container, .sheet-container, .btn-group { display: none !important; }
+
+      #printArea {
+        display: block !important;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      .opr-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 3px double #000;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+      }
+
+      .opr-header img { width: 70px; height: 70px; object-fit: contain; }
+      .opr-header-text { text-align: center; flex: 1; margin: 0 10px; }
+      .opr-header-text h2 { margin: 0; font-size: 14pt; font-weight: bold; text-transform: uppercase; }
+      .opr-header-text h3 { margin: 2px 0 0 0; font-size: 11pt; font-weight: bold; text-transform: uppercase; color: #1e3a8a; }
+      .opr-header-text p { margin: 2px 0 0 0; font-size: 9pt; }
+
+      .opr-title-box {
+        background: #f1f5f9;
+        border: 1px solid #000;
+        text-align: center;
+        padding: 6px;
+        font-weight: bold;
+        font-size: 11pt;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      .opr-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 10px;
+        font-size: 9.5pt;
+      }
+
+      .opr-table td, .opr-table th {
+        border: 1px solid #000;
+        padding: 5px 8px;
+        vertical-align: top;
+      }
+
+      .opr-table th {
+        background-color: #f1f5f9;
+        text-align: left;
+        width: 25%;
+        font-weight: bold;
+      }
+
+      .opr-section-header {
+        background-color: #1e3a8a;
+        color: white;
+        font-weight: bold;
+        padding: 4px 8px;
+        font-size: 9.5pt;
+        text-transform: uppercase;
+        margin-top: 8px;
+        margin-bottom: 4px;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .opr-text-box {
+        border: 1px solid #000;
+        padding: 6px 8px;
+        font-size: 9pt;
+        min-height: 45px;
+        white-space: pre-line;
+        margin-bottom: 8px;
+      }
+
+      .opr-photos-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 6px;
+      }
+
+      .opr-photo-card {
+        border: 1px solid #000;
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #fafafa;
+      }
+
+      .opr-photo-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   </style>
 </head>
@@ -205,7 +263,7 @@
 <div class="container">
   <div class="card">
     
-    <!-- Header Banner Dengan Logo Sekolah Tempatan -->
+    <!-- Pengepala Form Web -->
     <div class="header-banner">
       <img src="logo.jpg" alt="Logo SK Simpang Rawai" class="school-logo">
       <h1>SK SIMPANG RAWAI</h1>
@@ -213,79 +271,129 @@
     </div>
 
     <form id="oprForm">
-      <div class="section-title">📌 Maklumat Utama Program</div>
+      <div class="section-title">📌 Maklumat Laporan Program</div>
 
       <div class="form-group">
-        <label>Tajuk Program</label>
-        <input type="text" id="tajuk" value="PROGRAM SAFE 'KAMU BULI POLIS TANGKAP'" required>
+        <label>Tajuk Program / Aktiviti:</label>
+        <input type="text" id="tajuk" placeholder="Contoh: PROGRAM SAFE 'KAMU BULI POLIS TANGKAP'" required>
       </div>
 
       <div class="form-grid">
         <div class="form-group">
-          <label>Unit Anjuran</label>
-          <input type="text" id="unit" value="Unit Hal Ehwal Murid (HEM)">
+          <label>Unit / Anjuran:</label>
+          <input type="text" id="unit" placeholder="Contoh: Unit Hal Ehwal Murid (HEM)">
         </div>
         <div class="form-group">
-          <label>Tarikh</label>
-          <input type="text" id="tarikh" value="Khamis (5/11/2026)">
+          <label>Tarikh:</label>
+          <input type="text" id="tarikh" placeholder="Contoh: 5 November 2026 (Khamis)">
         </div>
         <div class="form-group">
-          <label>Masa</label>
-          <input type="text" id="masa" value="11.00 pagi - 12.30 tengah hari">
+          <label>Masa:</label>
+          <input type="text" id="masa" placeholder="Contoh: 11.00 pagi - 12.30 tengah hari">
         </div>
         <div class="form-group">
-          <label>Tempat</label>
-          <input type="text" id="tempat" value="Dewan Al Jazari">
+          <label>Tempat:</label>
+          <input type="text" id="tempat" placeholder="Contoh: Dewan Al-Jazari">
         </div>
       </div>
 
       <div class="form-grid">
         <div class="form-group">
-          <label>Sasaran Program</label>
-          <input type="text" id="sasaran" value="Murid Tahap 2">
+          <label>Sasaran:</label>
+          <input type="text" id="sasaran" placeholder="Contoh: Semua Murid Tahap 2">
         </div>
         <div class="form-group">
-          <label>Jemputan / Penceramah</label>
-          <input type="text" id="jemputan" value="ASP Tuan Othman bin Ibrahim">
+          <label>Jemputan / Penceramah:</label>
+          <input type="text" id="jemputan" placeholder="Contoh: ASP Tuan Othman bin Ibrahim">
         </div>
       </div>
 
       <div class="btn-group">
-        <button type="button" class="btn btn-ai" onclick="generateAI()">✨ AI Generate Objektif & Impak</button>
+        <button type="button" class="btn btn-ai" onclick="generateAI()">✨ AI Generate Objektif & Impak Ringkas</button>
       </div>
 
-      <div class="section-title">📝 Detail & Kandungan Laporan</div>
+      <div class="section-title">📝 Kandungan & Perincian Laporan</div>
 
       <div class="form-group">
-        <label>Objektif Program</label>
-        <textarea id="objektif">1. Memberi kesedaran dan pendedahan awal mengenai bahaya serta implikasi kes buli di sekolah.
-2. Memupuk disiplin dan kesedaran undang-undang dalam kalangan murid Tahap 2.
-3. Mengeratkan kerjasama antara pihak sekolah dan PDRM.</textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Impak Program</label>
-        <textarea id="impak">Murid mendapat pendedahan jelas tentang akibat perbuatan buli dari sudut undang-undang dan disiplin serta mewujudkan persekitaran sekolah yang selamat.</textarea>
+        <label>Objektif Program:</label>
+        <textarea id="objektif" placeholder="Tuliskan objektif program atau gunakan bantuan AI di atas..."></textarea>
       </div>
 
       <div class="form-group">
-        <label>Muat Naik Gambar Aktiviti (Maksimum 4)</label>
+        <label>Impak Program / Penilaian:</label>
+        <textarea id="impak" placeholder="Tuliskan impak program atau gunakan bantuan AI di atas..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Muat Naik Gambar Aktiviti (Maksimum 4 Gambar):</label>
         <input type="file" id="gambarInput" accept="image/*" multiple onchange="processImages()">
         <div id="preview" class="preview-grid"></div>
       </div>
 
       <div class="btn-group">
-        <button type="button" class="btn btn-submit" id="btnSimpan" onclick="simpanKeSheets()">💾 Simpan ke Google Drive & Sheets</button>
-        <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+        <button type="button" class="btn btn-submit" id="btnSimpan" onclick="simpanKeSheets()">💾 Simpan Rekod ke Drive & Sheets</button>
+        <button type="button" class="btn btn-print" onclick="prepareAndPrint()">🖨️ Cetak Laporan OPR / Simpan PDF (1 Page A4)</button>
       </div>
     </form>
 
-    <!-- Paparan Live Google Sheet -->
+    <!-- Paparan Live Sheet -->
     <div class="sheet-container">
       <div class="section-title">📊 Rekod Laporan OPR (Google Sheet Live)</div>
       <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_dLChN5Jo22s1_7vKcJQq-Kr2wdmcL0aS28fARoirj3VHAk8eGcra3Rlm6hSN4Ssv_Lq0SoZSiXUT/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
     </div>
 
+  </div>
+</div>
+
+<!-- =========================================================
+     RUANGAN HASIL CETAKAN RASMI A4 (POPULATED VIA JAVASCRIPT)
+     ========================================================= -->
+<div id="printArea">
+  <div class="opr-header">
+    <img src="logo.jpg" alt="Logo Sekolah">
+    <div class="opr-header-text">
+      <h2>SEKOLAH KEBANGSAAN SIMPANG RAWAI</h2>
+      <h3>LAPORAN ONE PAGE REPORT (OPR)</h3>
+      <p>Kuala Terengganu, Terengganu Darul Iman</p>
+    </div>
+    <div style="width:70px;"></div> <!-- Pengimbang Header -->
+  </div>
+
+  <div class="opr-title-box" id="pTajuk">TAJUK PROGRAM</div>
+
+  <table class="opr-table">
+    <tr>
+      <th>UNIT / ANJURAN</th>
+      <td id="pUnit">-</td>
+      <th>TARIKH</th>
+      <td id="pTarikh">-</td>
+    </tr>
+    <tr>
+      <th>MASA</th>
+      <td id="pMasa">-</td>
+      <th>TEMPAT</th>
+      <td id="pTempat">-</td>
+    </tr>
+    <tr>
+      <th>SASARAN</th>
+      <td id="pSasaran">-</td>
+      <th>JEMPUTAN</th>
+      <td id="pJemputan">-</td>
+    </tr>
+  </table>
+
+  <div class="opr-section-header">1. OBJEKTIF PROGRAM</div>
+  <div class="opr-text-box" id="pObjektif">-</div>
+
+  <div class="opr-section-header">2. IMPAK & PENILAIAN PROGRAM</div>
+  <div class="opr-text-box" id="pImpak">-</div>
+
+  <div class="opr-section-header">3. RAKAMAN GAMBAR AKTIVITI</div>
+  <div class="opr-photos-grid" id="pPhotosGrid">
+    <div class="opr-photo-card"><span>[ Tiada Gambar ]</span></div>
+    <div class="opr-photo-card"><span>[ Tiada Gambar ]</span></div>
+    <div class="opr-photo-card"><span>[ Tiada Gambar ]</span></div>
+    <div class="opr-photo-card"><span>[ Tiada Gambar ]</span></div>
   </div>
 </div>
 
@@ -338,12 +446,17 @@
 
   function generateAI() {
     const tajuk = document.getElementById("tajuk").value;
-    const sasaran = document.getElementById("sasaran").value;
-    if (!tajuk) return alert("Sila isi Tajuk Program.");
+    const sasaran = document.getElementById("sasaran").value || "murid/peserta";
+    
+    if (!tajuk) {
+      alert("Sila isi Tajuk Program terlebih dahulu untuk membolehkan AI menjana Objektif & Impak.");
+      return;
+    }
 
-    document.getElementById("objektif").value = `1. Memberi kesedaran mendalam tentang ${tajuk} kepada ${sasaran}.\n2. Memupuk sahsiah dan disiplin terpuji.\n3. Mewujudkan suasana sekolah yang harmoni dan selamat.`;
-    document.getElementById("impak").value = `Program ini berjaya meningkatkan kesedaran ${sasaran} dan memperkasakan amalan disiplin di sekolah.`;
-    alert("Objektif & Impak berjaya dijana oleh AI!");
+    document.getElementById("objektif").value = `1. Memberi kesedaran dan pemahaman jelas berkaitan ${tajuk}.\n2. Memupuk nilai murni, sahsiah terpuji, dan disiplin dalam kalangan ${sasaran}.\n3. Mewujudkan persekitaran sekolah yang selamat, kondusif, dan harmoni.`;
+    document.getElementById("impak").value = `Program ini berjaya meningkatkan tahap kesedaran ${sasaran} serta memberi impak positif terhadap pembentukan sahsiah dan disiplin murid secara menyeluruh.`;
+    
+    alert("✨ AI berjaya menjana cadangan Objektif & Impak ringkas!");
   }
 
   async function simpanKeSheets() {
@@ -376,8 +489,50 @@
       alert("❌ Ralat: " + e.message);
     } finally {
       btn.disabled = false;
-      btn.innerText = "💾 Simpan ke Google Drive & Sheets";
+      btn.innerText = "💾 Simpan Rekod ke Drive & Sheets";
     }
+  }
+
+  // Fungsi Menyediakan Format A4 Cetakan Rasmi
+  function prepareAndPrint() {
+    document.getElementById('pTajuk').innerText = document.getElementById('tajuk').value || "LAPORAN PROGRAM SEKOLAH";
+    document.getElementById('pUnit').innerText = document.getElementById('unit').value || "-";
+    document.getElementById('pTarikh').innerText = document.getElementById('tarikh').value || "-";
+    document.getElementById('pMasa').innerText = document.getElementById('masa').value || "-";
+    document.getElementById('pTempat').innerText = document.getElementById('tempat').value || "-";
+    document.getElementById('pSasaran').innerText = document.getElementById('sasaran').value || "-";
+    document.getElementById('pJemputan').innerText = document.getElementById('jemputan').value || "-";
+    
+    document.getElementById('pObjektif').innerText = document.getElementById('objektif').value || "Tiada Maklumat";
+    document.getElementById('pImpak').innerText = document.getElementById('impak').value || "Tiada Maklumat";
+
+    const photosGrid = document.getElementById('pPhotosGrid');
+    photosGrid.innerHTML = '';
+
+    if (compressedImages.length > 0) {
+      compressedImages.forEach(imgData => {
+        const div = document.createElement('div');
+        div.className = 'opr-photo-card';
+        div.innerHTML = `<img src="${imgData}" alt="Gambar Aktiviti">`;
+        photosGrid.appendChild(div);
+      });
+      // Isikan petak kosong jika kurang daripada 4 gambar
+      for (let i = compressedImages.length; i < 4; i++) {
+        const div = document.createElement('div');
+        div.className = 'opr-photo-card';
+        div.innerHTML = `<span>[ Ruang Gambar ${i+1} ]</span>`;
+        photosGrid.appendChild(div);
+      }
+    } else {
+      for (let i = 0; i < 4; i++) {
+        const div = document.createElement('div');
+        div.className = 'opr-photo-card';
+        div.innerHTML = `<span>[ Ruang Gambar ${i+1} ]</span>`;
+        photosGrid.appendChild(div);
+      }
+    }
+
+    window.print();
   }
 </script>
 </body>
