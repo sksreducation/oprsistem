@@ -10,7 +10,6 @@
   <style>
     :root {
       --primary: #9333ea;
-      --primary-light: #f472b6;
       --secondary: #0f172a;
       --bg: #f8fafc;
       --card-bg: #ffffff;
@@ -97,7 +96,7 @@
       background-color: #fff;
     }
 
-    textarea { height: 75px; resize: vertical; }
+    textarea { height: 70px; resize: vertical; }
 
     .btn-group { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
 
@@ -121,14 +120,14 @@
 
     .preview-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
       margin-top: 8px;
     }
 
     .preview-img {
       width: 100%;
-      height: 90px;
+      height: 75px;
       object-fit: cover;
       border-radius: 6px;
       border: 1px solid var(--border);
@@ -138,14 +137,14 @@
     iframe { width: 100%; height: 350px; border: 1.5px solid var(--border); border-radius: 8px; }
 
     /* =========================================================
-       FORMAT LAYOUT A4 CETAKAN MODEN (REKA BENTUK POSTER OPR)
+       FORMAT LAYOUT A4 CETAKAN MODEN (4 GAMBAR + 1 PAGE FIT)
        ========================================================= */
     #printArea { display: none; }
 
     @media print {
       @page {
         size: A4 portrait;
-        margin: 6mm;
+        margin: 4mm;
       }
       body {
         background: white !important;
@@ -159,33 +158,34 @@
 
       #printArea {
         display: grid !important;
-        grid-template-columns: 240px 1fr;
-        gap: 15px;
+        grid-template-columns: 210px 1fr;
+        gap: 12px;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         box-sizing: border-box;
         position: relative;
         background: #ffffff;
+        overflow: hidden;
       }
 
-      /* HYBRID DEKORASI BULATAN ATAS KIRI */
+      /* HYBRID DEKORASI BULATAN */
       .circle-deco-1 {
         position: absolute;
-        top: -60px;
-        left: -60px;
-        width: 220px;
-        height: 220px;
+        top: -50px;
+        left: -50px;
+        width: 180px;
+        height: 180px;
         border-radius: 50%;
-        border: 12px solid #7e22ce;
+        border: 10px solid #7e22ce;
         background: #f0abfc;
         z-index: 1;
       }
       .circle-deco-2 {
         position: absolute;
-        top: 140px;
-        left: 170px;
-        width: 35px;
-        height: 35px;
+        top: 110px;
+        left: 145px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
         background: #581c87;
         z-index: 1;
@@ -196,73 +196,59 @@
         display: flex;
         flex-direction: column;
         z-index: 2;
-        padding-top: 130px;
+        padding-top: 100px;
       }
 
       .opr-badge-title {
-        font-size: 16pt;
+        font-size: 13pt;
         font-weight: 900;
         color: #000;
         text-transform: uppercase;
-        margin-bottom: 10px;
+        margin-bottom: 6px;
         letter-spacing: 0.5px;
       }
 
       .info-label {
-        font-size: 8.5pt;
+        font-size: 7.5pt;
         font-weight: 800;
         color: #000;
         text-transform: uppercase;
-        margin-top: 6px;
-        margin-bottom: 2px;
+        margin-top: 4px;
+        margin-bottom: 1px;
       }
 
       .info-pill {
-        background-color: #f472b6 !important;
+        background-color: #ec4899 !important;
         color: white !important;
-        padding: 5px 8px;
-        border-radius: 6px;
-        font-size: 8.5pt;
+        padding: 4px 6px;
+        border-radius: 5px;
+        font-size: 7.5pt;
         font-weight: 600;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
         word-break: break-word;
       }
 
-      .left-photos {
-        margin-top: 15px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+      /* GRID 4 GAMBAR AKTIVITI (2x2) */
+      .left-photos-grid {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
       }
 
-      .photo-big {
+      .photo-box {
         width: 100%;
-        height: 130px;
-        background: #e2e8f0;
-        border-radius: 6px;
+        height: 75px;
+        background: #f1f5f9;
+        border-radius: 5px;
         overflow: hidden;
         border: 1px solid #cbd5e1;
       }
 
-      .photo-big img, .photo-small img {
+      .photo-box img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-      }
-
-      .photo-row-small {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 6px;
-      }
-
-      .photo-small {
-        width: 100%;
-        height: 75px;
-        background: #e2e8f0;
-        border-radius: 6px;
-        overflow: hidden;
-        border: 1px solid #cbd5e1;
       }
 
       /* LAJUR KANAN */
@@ -270,7 +256,7 @@
         display: flex;
         flex-direction: column;
         z-index: 2;
-        padding-top: 10px;
+        padding-top: 4px;
       }
 
       .right-header {
@@ -278,61 +264,54 @@
         flex-direction: column;
         align-items: flex-end;
         text-align: right;
-        margin-bottom: 10px;
-      }
-
-      .header-logos {
-        display: flex;
-        gap: 8px;
-        align-items: center;
         margin-bottom: 4px;
       }
 
       .header-logos img {
-        height: 40px;
+        height: 38px;
         width: auto;
       }
 
       .school-name-text {
-        font-size: 11pt;
+        font-size: 10pt;
         font-weight: 800;
         color: #7e22ce;
         text-transform: uppercase;
       }
 
       .program-main-title {
-        font-size: 16pt;
+        font-size: 13pt;
         font-weight: 900;
         color: #000;
         text-align: right;
         text-transform: uppercase;
-        margin-top: 5px;
-        margin-bottom: 12px;
-        line-height: 1.2;
+        margin-top: 2px;
+        margin-bottom: 8px;
+        line-height: 1.15;
       }
 
       .block-section {
-        margin-bottom: 10px;
+        margin-bottom: 6px;
       }
 
       .block-header {
-        font-size: 9.5pt;
+        font-size: 8.5pt;
         font-weight: 800;
         color: #000;
         text-transform: uppercase;
-        margin-bottom: 3px;
+        margin-bottom: 2px;
         text-align: center;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.4px;
       }
 
       .block-content {
         background-color: #c084fc !important;
         color: white !important;
-        border-radius: 10px;
-        padding: 8px 12px;
-        font-size: 8.5pt;
-        line-height: 1.35;
-        min-height: 50px;
+        border-radius: 8px;
+        padding: 6px 10px;
+        font-size: 7.8pt;
+        line-height: 1.25;
+        min-height: 42px;
         white-space: pre-line;
       }
 
@@ -340,8 +319,9 @@
         margin-top: auto;
         text-align: right;
         font-size: 7.5pt;
-        color: #475569;
-        padding-top: 10px;
+        color: #0f172a;
+        padding-top: 4px;
+        border-top: 1px solid #e2e8f0;
       }
     }
   </style>
@@ -372,7 +352,6 @@
           <input type="text" id="unit" placeholder="Contoh: Unit Hal Ehwal Murid (HEM)">
         </div>
         <div class="form-group">
-          <!-- PILIHAN TARIKH (DATE PICKER) -->
           <label>Tarikh Program:</label>
           <input type="date" id="tarikh" required>
         </div>
@@ -392,8 +371,8 @@
           <input type="text" id="sasaran" placeholder="Contoh: Semua Murid Tahap 2">
         </div>
         <div class="form-group">
-          <label>Jemputan / Penceramah:</label>
-          <input type="text" id="jemputan" placeholder="Contoh: ASP Tuan Othman bin Ibrahim">
+          <label>Disediakan Oleh (Nama Guru):</label>
+          <input type="text" id="penyedia" placeholder="Contoh: Cikgu Ahmad Bin Ismail">
         </div>
       </div>
 
@@ -424,14 +403,14 @@
       </div>
 
       <div class="form-group">
-        <label>Muat Naik Gambar Aktiviti (Maksimum 3 Gambar):</label>
+        <label>Muat Naik Gambar Aktiviti (Maksimum 4 Gambar):</label>
         <input type="file" id="gambarInput" accept="image/*" multiple onchange="processImages()">
         <div id="preview" class="preview-grid"></div>
       </div>
 
       <div class="btn-group">
         <button type="button" class="btn btn-submit" id="btnSimpan" onclick="simpanKeSheets()">💾 Simpan Rekod ke Drive & Sheets</button>
-        <button type="button" class="btn btn-print" onclick="prepareAndPrint()">🖨️ Cetak / Simpan PDF OPR (Format Poster A4)</button>
+        <button type="button" class="btn btn-print" onclick="prepareAndPrint()">🖨️ Cetak / Simpan PDF OPR (Format A4)</button>
       </div>
     </form>
 
@@ -445,7 +424,7 @@
 </div>
 
 <!-- =========================================================
-     RUANGAN LAYOUT FORMAT CETAKAN POSTER A4 (BERDASARKAN CONTOH)
+     RUANGAN LAYOUT FORMAT CETAKAN POSTER A4 (4 GAMBAR & NAMA GURU)
      ========================================================= -->
 <div id="printArea">
   <div class="circle-deco-1"></div>
@@ -470,18 +449,11 @@
     <div class="info-label">SASARAN</div>
     <div class="info-pill" id="pSasaran">-</div>
 
-    <div class="left-photos">
-      <div class="photo-big" id="photoBig">
-        <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:8pt;">[ Gambar 1 ]</div>
-      </div>
-      <div class="photo-row-small">
-        <div class="photo-small" id="photoSmall1">
-          <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">[ Gambar 2 ]</div>
-        </div>
-        <div class="photo-small" id="photoSmall2">
-          <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">[ Gambar 3 ]</div>
-        </div>
-      </div>
+    <div class="left-photos-grid" id="pPhotosGrid">
+      <div class="photo-box"><div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">Gambar 1</div></div>
+      <div class="photo-box"><div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">Gambar 2</div></div>
+      <div class="photo-box"><div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">Gambar 3</div></div>
+      <div class="photo-box"><div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">Gambar 4</div></div>
     </div>
   </div>
 
@@ -494,7 +466,7 @@
       <div class="school-name-text">SEKOLAH KEBANGSAAN SIMPANG RAWAI</div>
     </div>
 
-    <div class="program-main-title" id="pTajuk">PELANCARAN PROGRAM & AKTIVITI SEKOLAH</div>
+    <div class="program-main-title" id="pTajuk">TAJUK PROGRAM / AKTIVITI</div>
 
     <div class="block-section">
       <div class="block-header">OBJEKTIF PROGRAM</div>
@@ -517,7 +489,7 @@
     </div>
 
     <div class="opr-footer-sign">
-      Disediakan oleh: <strong>SK Simpang Rawai</strong>
+      Disediakan oleh: <strong id="pPenyedia">Nama Guru</strong> | SK Simpang Rawai
     </div>
   </div>
 </div>
@@ -527,7 +499,7 @@
   let compressedImages = [];
 
   function processImages() {
-    const files = Array.from(document.getElementById('gambarInput').files).slice(0, 3);
+    const files = Array.from(document.getElementById('gambarInput').files).slice(0, 4);
     const container = document.getElementById('preview');
     container.innerHTML = '';
     compressedImages = [];
@@ -591,7 +563,6 @@
     btn.disabled = true;
     btn.innerText = "⏳ Memproses & Menghantar...";
 
-    // Tukar format tarikh untuk disimpan
     let rawDate = document.getElementById("tarikh").value;
     let formattedDate = rawDate;
     if (rawDate) {
@@ -606,7 +577,7 @@
       masa: document.getElementById("masa").value,
       tempat: document.getElementById("tempat").value,
       sasaran: document.getElementById("sasaran").value,
-      jemputan: document.getElementById("jemputan").value,
+      jemputan: document.getElementById("penyedia").value,
       objektif: document.getElementById("objektif").value,
       impak: document.getElementById("impak").value,
       gambarList: compressedImages
@@ -628,7 +599,6 @@
     }
   }
 
-  // Formatkan Pilihan Tarikh dan Muatkan ke Cetakan Poster
   function prepareAndPrint() {
     let rawDate = document.getElementById('tarikh').value;
     let displayDate = "-";
@@ -643,33 +613,26 @@
     document.getElementById('pMasa').innerText = document.getElementById('masa').value || "-";
     document.getElementById('pTempat').innerText = document.getElementById('tempat').value || "-";
     document.getElementById('pSasaran').innerText = document.getElementById('sasaran').value || "-";
+    document.getElementById('pPenyedia').innerText = document.getElementById('penyedia').value || "Guru SK Simpang Rawai";
 
     document.getElementById('pObjektif').innerText = document.getElementById('objektif').value || "-";
     document.getElementById('pAktiviti').innerText = document.getElementById('aktiviti').value || "-";
     document.getElementById('pImpak').innerText = document.getElementById('impak').value || "-";
     document.getElementById('pPenambahbaikan').innerText = document.getElementById('penambahbaikan').value || "-";
 
-    // Kemaskini Gambar Pada Cetakan Poster
-    const photoBig = document.getElementById('photoBig');
-    const photoSmall1 = document.getElementById('photoSmall1');
-    const photoSmall2 = document.getElementById('photoSmall2');
+    // Isikan 4 Ruang Gambar Pada Cetakan
+    const pGrid = document.getElementById('pPhotosGrid');
+    pGrid.innerHTML = '';
 
-    if (compressedImages.length > 0) {
-      photoBig.innerHTML = `<img src="${compressedImages[0]}" alt="Gambar Utama">`;
-    } else {
-      photoBig.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:8pt;">[ Gambar Utama ]</div>`;
-    }
-
-    if (compressedImages.length > 1) {
-      photoSmall1.innerHTML = `<img src="${compressedImages[1]}" alt="Gambar 2">`;
-    } else {
-      photoSmall1.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">[ Gambar 2 ]</div>`;
-    }
-
-    if (compressedImages.length > 2) {
-      photoSmall2.innerHTML = `<img src="${compressedImages[2]}" alt="Gambar 3">`;
-    } else {
-      photoSmall2.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">[ Gambar 3 ]</div>`;
+    for (let i = 0; i < 4; i++) {
+      const box = document.createElement('div');
+      box.className = 'photo-box';
+      if (compressedImages[i]) {
+        box.innerHTML = `<img src="${compressedImages[i]}" alt="Gambar ${i+1}">`;
+      } else {
+        box.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:7pt;">Gambar ${i+1}</div>`;
+      }
+      pGrid.appendChild(box);
     }
 
     window.print();
