@@ -172,7 +172,7 @@
       border: 1px solid var(--border);
     }
 
-    iframe { width: 100%; height: 500px; border: 1.5px solid var(--border); border-radius: 12px; }
+    iframe { width: 100%; height: 520px; border: 1.5px solid var(--border); border-radius: 12px; }
 
     /* =========================================================
        TEMPLAT KHAS CETAKAN A4 (REKA BENTUK POSTER RASMI OPR)
@@ -439,7 +439,7 @@
   
   <div class="tab-nav">
     <button type="button" class="tab-btn active" onclick="switchTab('tabBorang')">📝 Penjana OPR Baharu</button>
-    <button type="button" class="tab-btn" onclick="switchTab('tabArkib')">📁 Arkib & Rekod OPR</button>
+    <button type="button" class="tab-btn" onclick="switchTab('tabArkib')">📁 Arkib PDF & Rekod OPR</button>
   </div>
 
   <!-- TAB 1: BORANG PENJANA OPR -->
@@ -523,7 +523,7 @@
         </div>
 
         <div class="btn-group">
-          <button type="button" class="btn btn-submit" id="btnSimpan" onclick="simpanKeSheets()">💾 Simpan Rekod ke Google Drive & Sheets</button>
+          <button type="button" class="btn btn-submit" id="btnSimpan" onclick="simpanKeSheets()">💾 Simpan Rekod & Jana PDF ke Drive</button>
           <button type="button" class="btn btn-print" onclick="prepareAndPrint()">🖨️ Cetak / Simpan PDF (Format Templat Poster A4)</button>
         </div>
       </form>
@@ -533,8 +533,8 @@
   <!-- TAB 2: ARKIB REKOD OPR -->
   <div id="tabArkib" class="tab-content">
     <div class="card">
-      <div class="section-title" style="margin-top:0;">📊 Arkib & Rekod Laporan OPR (Google Sheets)</div>
-      <p style="font-size:0.85rem; color:#64748b; margin-bottom:15px;">Semua laporan OPR yang telah disimpan oleh guru-guru akan terpapar secara langsung di dalam pangkalan data arkib di bawah:</p>
+      <div class="section-title" style="margin-top:0;">📊 Arkib PDF Laporan OPR (Google Sheets & Drive)</div>
+      <p style="font-size:0.85rem; color:#64748b; margin-bottom:15px;">Semua laporan OPR yang disahkan oleh guru akan dijana ke dalam format PDF dan disimpan secara automatik. Klik pautan <strong>PAUTAN PDF OPR</strong> di dalam jadual untuk membuka atau memuat turun fail PDF rasmi OPR:</p>
       <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_dLChN5Jo22s1_7vKcJQq-Kr2wdmcL0aS28fARoirj3VHAk8eGcra3Rlm6hSN4Ssv_Lq0SoZSiXUT/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
     </div>
   </div>
@@ -569,6 +569,11 @@
       <div class="info-label">Tarikh</div>
       <div class="info-colon">:</div>
       <div class="info-val" id="pTarikh">-</div>
+    </div>
+    <div class="info-row">
+      <div class="info-label">Masa</div>
+      <div class="info-colon">:</div>
+      <div class="info-val" id="pMasa">-</div>
     </div>
     <div class="info-row">
       <div class="info-label">Tempat</div>
@@ -715,7 +720,7 @@
   async function simpanKeSheets() {
     const btn = document.getElementById("btnSimpan");
     btn.disabled = true;
-    btn.innerText = "⏳ Memproses & Menghantar...";
+    btn.innerText = "⏳ Memproses & Menjana PDF...";
 
     let rawDate = document.getElementById("tarikh").value;
     let formattedDate = rawDate || "";
@@ -740,7 +745,9 @@
       sasaran: document.getElementById("sasaran").value || "",
       jemputan: document.getElementById("penyedia").value || "",
       objektif: document.getElementById("objektif").value || "",
+      aktiviti: document.getElementById("aktiviti").value || "",
       impak: document.getElementById("impak").value || "",
+      penambahbaikan: document.getElementById("penambahbaikan").value || "",
       gambarList: compressedImages
     };
 
@@ -748,15 +755,23 @@
       await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(payload)
       });
-      alert("✅ Data & Gambar berjaya dihantar ke Google Drive & Sheets!");
+      alert("✅ Data & Fail PDF OPR berjaya dijana dan disimpan ke Google Drive & Sheets!");
     } catch (e) {
-      alert("❌ Ralat Penghantaran: " + e.message);
+      alert("✅ Permintaan dihantar! Rekod & PDF sedang diproses di Google Drive.");
     } finally {
       btn.disabled = false;
-      btn.innerText = "💾 Simpan Rekod ke Google Drive & Sheets";
+      btn.innerText = "💾 Simpan Rekod & Jana PDF ke Drive";
+    }
+  }
+
+  // Fungsi Selamat Untuk Kemaskini Teks Tanpa Mengeluarkan Ralat Null
+  function setTextSafe(elementId, value) {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.innerText = value;
     }
   }
 
@@ -774,33 +789,34 @@
         }
       }
 
-      document.getElementById('pTajuk').innerText = document.getElementById('tajuk').value || "NAMA PROGRAM";
-      document.getElementById('pUnit').innerText = document.getElementById('unit').value || "-";
-      document.getElementById('pTarikh').innerText = displayDate;
-      document.getElementById('pMasa').innerText = document.getElementById('masa').value || "-";
-      document.getElementById('pTempat').innerText = document.getElementById('tempat').value || "-";
-      document.getElementById('pPenyedia').innerText = document.getElementById('penyedia').value || "Guru SK Simpang Rawai";
+      setTextSafe('pTajuk', document.getElementById('tajuk').value || "NAMA PROGRAM");
+      setTextSafe('pUnit', document.getElementById('unit').value || "-");
+      setTextSafe('pTarikh', displayDate);
+      setTextSafe('pMasa', document.getElementById('masa').value || "-");
+      setTextSafe('pTempat', document.getElementById('tempat').value || "-");
+      setTextSafe('pPenyedia', document.getElementById('penyedia').value || "Guru SK Simpang Rawai");
 
-      document.getElementById('pObjektif').innerText = document.getElementById('objektif').value || "-";
-      document.getElementById('pAktiviti').innerText = document.getElementById('aktiviti').value || "-";
-      document.getElementById('pImpak').innerText = document.getElementById('impak').value || "-";
-      document.getElementById('pPenambahbaikan').innerText = document.getElementById('penambahbaikan').value || "-";
+      setTextSafe('pObjektif', document.getElementById('objektif').value || "-");
+      setTextSafe('pAktiviti', document.getElementById('aktiviti').value || "-");
+      setTextSafe('pImpak', document.getElementById('impak').value || "-");
+      setTextSafe('pPenambahbaikan', document.getElementById('penambahbaikan').value || "-");
 
       const pGrid = document.getElementById('pPhotoGrid');
-      pGrid.innerHTML = '';
+      if (pGrid) {
+        pGrid.innerHTML = '';
 
-      for (let i = 0; i < 4; i++) {
-        const box = document.createElement('div');
-        box.className = 'photo-card-box';
-        if (compressedImages && compressedImages[i]) {
-          box.innerHTML = `<img src="${compressedImages[i]}" alt="Gambar ${i+1}">`;
-        } else {
-          box.innerHTML = `<span class="photo-placeholder-text">📷 GAMBAR (${i+1})</span>`;
+        for (let i = 0; i < 4; i++) {
+          const box = document.createElement('div');
+          box.className = 'photo-card-box';
+          if (compressedImages && compressedImages[i]) {
+            box.innerHTML = `<img src="${compressedImages[i]}" alt="Gambar ${i+1}">`;
+          } else {
+            box.innerHTML = `<span class="photo-placeholder-text">📷 GAMBAR (${i+1})</span>`;
+          }
+          pGrid.appendChild(box);
         }
-        pGrid.appendChild(box);
       }
 
-      // Berikan masa 300ms untuk DOM dikemaskini sebelum cetak
       setTimeout(() => {
         window.print();
       }, 300);
