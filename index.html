@@ -209,7 +209,6 @@
         overflow: hidden;
       }
 
-      /* Background Accent Ribbons Top & Bottom */
       .top-gold-bg {
         position: absolute;
         top: 0;
@@ -244,7 +243,6 @@
         font-weight: 600;
       }
 
-      /* Header Template */
       .opr-template-header {
         position: relative;
         z-index: 5;
@@ -314,7 +312,6 @@
         box-shadow: 0 2px 4px rgba(0,0,0,0.15);
       }
 
-      /* Program Info Box */
       .program-info-box {
         position: relative;
         z-index: 5;
@@ -336,7 +333,6 @@
       .info-colon { margin-right: 2mm; font-weight: 800; }
       .info-val { flex: 1; font-weight: 600; color: #000000; border-bottom: 1px solid #cbd5e1; }
 
-      /* 4 Photo Grid Layout */
       .photo-grid-container {
         position: relative;
         z-index: 5;
@@ -372,7 +368,6 @@
         text-align: center;
       }
 
-      /* 4 Content Blocks Grid */
       .content-blocks-grid {
         position: relative;
         z-index: 5;
@@ -442,10 +437,9 @@
 
 <div class="container">
   
-  <!-- Tab Navigation -->
   <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('tabBorang')">📝 Penjana OPR Baharu</button>
-    <button class="tab-btn" onclick="switchTab('tabArkib')">📁 Arkib & Rekod OPR</button>
+    <button type="button" class="tab-btn active" onclick="switchTab('tabBorang')">📝 Penjana OPR Baharu</button>
+    <button type="button" class="tab-btn" onclick="switchTab('tabArkib')">📁 Arkib & Rekod OPR</button>
   </div>
 
   <!-- TAB 1: BORANG PENJANA OPR -->
@@ -458,18 +452,18 @@
         <p>"Ilmu, Disiplin, Prestasi"</p>
       </div>
 
-      <form id="oprForm">
+      <form id="oprForm" onsubmit="return false;">
         <div class="section-title">📌 Maklumat Utama Program</div>
 
         <div class="form-group">
           <label>Nama Program / Aktiviti:</label>
-          <input type="text" id="tajuk" placeholder="Contoh: PELANCARAN NILAM & GALAKAN MEMBACA 2026" required>
+          <input type="text" id="tajuk" placeholder="Contoh: PELANCARAN NILAM & GALAKAN MEMBACA 2026">
         </div>
 
         <div class="form-grid">
           <div class="form-group">
             <label>Tarikh Program:</label>
-            <input type="date" id="tarikh" required>
+            <input type="date" id="tarikh">
           </div>
           <div class="form-group">
             <label>Masa:</label>
@@ -547,15 +541,12 @@
 
 </div>
 
-<!-- =========================================================
-     RUANGAN HASIL CETAKAN OPR (MENGIKUT TEMPLAT GRAFIK POSTER)
-     ========================================================= -->
+<!-- RUANGAN HASIL CETAKAN OPR -->
 <div id="printArea">
   <div class="top-gold-bg"></div>
   <div class="bottom-gold-bg"></div>
   <div class="footer-quote">"Bersama Membangun Generasi Madani"</div>
 
-  <!-- Header Templat -->
   <div class="opr-template-header">
     <div class="logo-circle-container">
       <img src="logo.jpg" alt="Logo Sekolah">
@@ -566,10 +557,8 @@
     </div>
   </div>
 
-  <!-- Banner OPR -->
   <div class="banner-opr-title">OPERASI PENYELARASAN PROGRAM (OPR)</div>
 
-  <!-- Info Program Box -->
   <div class="program-info-box">
     <div class="info-row">
       <div class="info-label">Nama Program</div>
@@ -593,7 +582,6 @@
     </div>
   </div>
 
-  <!-- 4 Gambar Aktiviti Grid -->
   <div class="photo-grid-container" id="pPhotoGrid">
     <div class="photo-card-box"><span class="photo-placeholder-text">📷 GAMBAR (1)</span></div>
     <div class="photo-card-box"><span class="photo-placeholder-text">📷 GAMBAR (2)</span></div>
@@ -601,7 +589,6 @@
     <div class="photo-card-box"><span class="photo-placeholder-text">📷 GAMBAR (4)</span></div>
   </div>
 
-  <!-- 4 Blok Kandungan utama -->
   <div class="content-blocks-grid">
     <div class="block-item">
       <div class="block-badge-header">
@@ -647,20 +634,26 @@
   let compressedImages = [];
 
   function switchTab(tabId) {
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    const btns = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+    
+    btns.forEach(btn => btn.classList.remove('active'));
+    contents.forEach(content => content.classList.remove('active'));
 
     if (tabId === 'tabBorang') {
-      document.querySelectorAll('.tab-btn')[0].classList.add('active');
+      btns[0].classList.add('active');
       document.getElementById('tabBorang').classList.add('active');
     } else {
-      document.querySelectorAll('.tab-btn')[1].classList.add('active');
+      btns[1].classList.add('active');
       document.getElementById('tabArkib').classList.add('active');
     }
   }
 
   function processImages() {
-    const files = Array.from(document.getElementById('gambarInput').files).slice(0, 4);
+    const input = document.getElementById('gambarInput');
+    if (!input.files || input.files.length === 0) return;
+
+    const files = Array.from(input.files).slice(0, 4);
     const container = document.getElementById('preview');
     container.innerHTML = '';
     compressedImages = [];
@@ -725,22 +718,29 @@
     btn.innerText = "⏳ Memproses & Menghantar...";
 
     let rawDate = document.getElementById("tarikh").value;
-    let formattedDate = rawDate;
+    let formattedDate = rawDate || "";
     if (rawDate) {
-      const d = new Date(rawDate);
-      formattedDate = d.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
+      try {
+        const parts = rawDate.split('-');
+        if (parts.length === 3) {
+          const d = new Date(parts[0], parts[1] - 1, parts[2]);
+          formattedDate = d.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+      } catch (e) {
+        formattedDate = rawDate;
+      }
     }
 
     const payload = {
-      tajuk: document.getElementById("tajuk").value,
-      unit: document.getElementById("unit").value,
+      tajuk: document.getElementById("tajuk").value || "",
+      unit: document.getElementById("unit").value || "",
       tarikh: formattedDate,
-      masa: document.getElementById("masa").value,
-      tempat: document.getElementById("tempat").value,
-      sasaran: document.getElementById("sasaran").value,
-      jemputan: document.getElementById("penyedia").value,
-      objektif: document.getElementById("objektif").value,
-      impak: document.getElementById("impak").value,
+      masa: document.getElementById("masa").value || "",
+      tempat: document.getElementById("tempat").value || "",
+      sasaran: document.getElementById("sasaran").value || "",
+      jemputan: document.getElementById("penyedia").value || "",
+      objektif: document.getElementById("objektif").value || "",
+      impak: document.getElementById("impak").value || "",
       gambarList: compressedImages
     };
 
@@ -753,7 +753,7 @@
       });
       alert("✅ Data & Gambar berjaya dihantar ke Google Drive & Sheets!");
     } catch (e) {
-      alert("❌ Ralat: " + e.message);
+      alert("❌ Ralat Penghantaran: " + e.message);
     } finally {
       btn.disabled = false;
       btn.innerText = "💾 Simpan Rekod ke Google Drive & Sheets";
@@ -761,41 +761,53 @@
   }
 
   function prepareAndPrint() {
-    let rawDate = document.getElementById('tarikh').value;
-    let displayDate = "-";
-    if (rawDate) {
-      const d = new Date(rawDate);
-      displayDate = d.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
-    }
-
-    document.getElementById('pTajuk').innerText = document.getElementById('tajuk').value || "NAMA PROGRAM";
-    document.getElementById('pUnit').innerText = document.getElementById('unit').value || "-";
-    document.getElementById('pTarikh').innerText = displayDate;
-    document.getElementById('pMasa').innerText = document.getElementById('masa').value || "-";
-    document.getElementById('pTempat').innerText = document.getElementById('tempat').value || "-";
-    document.getElementById('pPenyedia').innerText = document.getElementById('penyedia').value || "Guru SK Simpang Rawai";
-
-    document.getElementById('pObjektif').innerText = document.getElementById('objektif').value || "-";
-    document.getElementById('pAktiviti').innerText = document.getElementById('aktiviti').value || "-";
-    document.getElementById('pImpak').innerText = document.getElementById('impak').value || "-";
-    document.getElementById('pPenambahbaikan').innerText = document.getElementById('penambahbaikan').value || "-";
-
-    // Isikan 4 Ruang Gambar Pada Cetakan Poster
-    const pGrid = document.getElementById('pPhotoGrid');
-    pGrid.innerHTML = '';
-
-    for (let i = 0; i < 4; i++) {
-      const box = document.createElement('div');
-      box.className = 'photo-card-box';
-      if (compressedImages[i]) {
-        box.innerHTML = `<img src="${compressedImages[i]}" alt="Gambar ${i+1}">`;
-      } else {
-        box.innerHTML = `<span class="photo-placeholder-text">📷 GAMBAR (${i+1})</span>`;
+    try {
+      let rawDate = document.getElementById('tarikh').value;
+      let displayDate = "-";
+      if (rawDate) {
+        const parts = rawDate.split('-');
+        if (parts.length === 3) {
+          const d = new Date(parts[0], parts[1] - 1, parts[2]);
+          displayDate = d.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
+        } else {
+          displayDate = rawDate;
+        }
       }
-      pGrid.appendChild(box);
-    }
 
-    window.print();
+      document.getElementById('pTajuk').innerText = document.getElementById('tajuk').value || "NAMA PROGRAM";
+      document.getElementById('pUnit').innerText = document.getElementById('unit').value || "-";
+      document.getElementById('pTarikh').innerText = displayDate;
+      document.getElementById('pMasa').innerText = document.getElementById('masa').value || "-";
+      document.getElementById('pTempat').innerText = document.getElementById('tempat').value || "-";
+      document.getElementById('pPenyedia').innerText = document.getElementById('penyedia').value || "Guru SK Simpang Rawai";
+
+      document.getElementById('pObjektif').innerText = document.getElementById('objektif').value || "-";
+      document.getElementById('pAktiviti').innerText = document.getElementById('aktiviti').value || "-";
+      document.getElementById('pImpak').innerText = document.getElementById('impak').value || "-";
+      document.getElementById('pPenambahbaikan').innerText = document.getElementById('penambahbaikan').value || "-";
+
+      const pGrid = document.getElementById('pPhotoGrid');
+      pGrid.innerHTML = '';
+
+      for (let i = 0; i < 4; i++) {
+        const box = document.createElement('div');
+        box.className = 'photo-card-box';
+        if (compressedImages && compressedImages[i]) {
+          box.innerHTML = `<img src="${compressedImages[i]}" alt="Gambar ${i+1}">`;
+        } else {
+          box.innerHTML = `<span class="photo-placeholder-text">📷 GAMBAR (${i+1})</span>`;
+        }
+        pGrid.appendChild(box);
+      }
+
+      // Berikan masa 300ms untuk DOM dikemaskini sebelum cetak
+      setTimeout(() => {
+        window.print();
+      }, 300);
+
+    } catch (err) {
+      alert("❌ Ralat Paparan Cetakan: " + err.message);
+    }
   }
 </script>
 </body>
