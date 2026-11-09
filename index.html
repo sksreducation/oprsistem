@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generator OPR SK Simpang Rawai</title>
+  <title>Generator & Arkib OPR SK Simpang Rawai</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1e3a8a;
-      --secondary: #0f172a;
-      --accent: #7c3aed;
-      --success: #059669;
+      --navy-main: #0a192f;
+      --navy-dark: #071120;
+      --gold-accent: #d4af37;
+      --gold-light: #f3e5ab;
+      --blue-accent: #1e3a8a;
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --border: #cbd5e1;
@@ -22,54 +23,89 @@
 
     body {
       background-color: var(--bg);
-      color: var(--secondary);
+      color: #1e293b;
       margin: 0;
       padding: 16px;
     }
 
     .container {
-      max-width: 780px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
+    /* Tab Navigation System */
+    .tab-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 14px;
+      border: 2px solid var(--navy-main);
+      background: white;
+      color: var(--navy-main);
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--navy-main);
+      color: white;
+      box-shadow: 0 4px 12px rgba(10, 25, 47, 0.2);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Card Form Web */
     .card {
       background: var(--card-bg);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 24px;
       box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
       border: 1px solid #e2e8f0;
     }
 
     .header-banner {
-      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
-      border-radius: 12px;
+      background: linear-gradient(135deg, var(--navy-main) 0%, #1e293b 100%);
+      border-radius: 14px;
       padding: 20px;
       text-align: center;
       color: white;
       margin-bottom: 20px;
+      border-bottom: 4px solid var(--gold-accent);
     }
 
     .school-logo-web {
-      width: 75px;
-      height: 75px;
+      width: 80px;
+      height: 80px;
       object-fit: contain;
       background: white;
       border-radius: 50%;
       padding: 4px;
       margin-bottom: 8px;
-      border: 2px solid #facc15;
+      border: 3px solid var(--gold-accent);
     }
 
-    .header-banner h1 { font-size: 1.3rem; margin: 0; font-weight: 800; }
-    .header-banner p { font-size: 0.85rem; margin: 4px 0 0 0; color: #cbd5e1; }
+    .header-banner h1 { font-size: 1.3rem; margin: 0; font-weight: 800; color: #fff; }
+    .header-banner p { font-size: 0.85rem; margin: 4px 0 0 0; color: var(--gold-light); font-style: italic; }
 
     .section-title {
       font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--primary);
+      font-weight: 800;
+      color: var(--navy-main);
       text-transform: uppercase;
-      margin-top: 16px;
-      margin-bottom: 8px;
+      margin-top: 18px;
+      margin-bottom: 10px;
       border-bottom: 2px solid #e2e8f0;
       padding-bottom: 4px;
     }
@@ -94,31 +130,32 @@
 
     input:focus, textarea:focus {
       outline: none;
-      border-color: var(--primary);
+      border-color: var(--navy-main);
       background-color: #fff;
     }
 
     textarea { height: 70px; resize: vertical; }
 
-    .btn-group { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
 
     .btn {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
+      transition: all 0.2s ease;
     }
 
-    .btn-ai { background: var(--accent); color: white; }
-    .btn-submit { background: var(--success); color: white; }
-    .btn-print { background: var(--primary); color: white; }
+    .btn-ai { background: #7c3aed; color: white; }
+    .btn-submit { background: #059669; color: white; }
+    .btn-print { background: var(--navy-main); color: white; border: 1.5px solid var(--gold-accent); }
 
     .preview-grid {
       display: grid;
@@ -135,18 +172,17 @@
       border: 1px solid var(--border);
     }
 
-    .sheet-container { margin-top: 24px; border-top: 2px dashed #e2e8f0; padding-top: 16px; }
-    iframe { width: 100%; height: 350px; border: 1.5px solid var(--border); border-radius: 8px; }
+    iframe { width: 100%; height: 500px; border: 1.5px solid var(--border); border-radius: 12px; }
 
     /* =========================================================
-       REKA BENTUK FULL A4 CETAKAN / PDF (100% PAGE UTILIZATION)
+       TEMPLAT KHAS CETAKAN A4 (REKA BENTUK POSTER RASMI OPR)
        ========================================================= */
     #printArea { display: none; }
 
     @media print {
       @page {
         size: A4 portrait;
-        margin: 6mm;
+        margin: 0;
       }
       
       body {
@@ -158,529 +194,290 @@
         print-color-adjust: exact !important;
       }
       
-      .card, .container, .sheet-container, .btn-group { display: none !important; }
+      .tab-nav, .card, .container { display: none !important; }
 
       #printArea {
         display: flex !important;
         flex-direction: column;
         justify-content: space-between;
-        width: 100%;
-        height: 280mm; /* Mengisi penuh 1 Muka Surat A4 */
+        width: 210mm;
+        height: 297mm;
         box-sizing: border-box;
-        padding: 6mm;
+        padding: 10mm 12mm;
         background: #ffffff;
+        position: relative;
+        overflow: hidden;
       }
 
-      /* Header Rasmi OPR */
-      .opr-header-container {
+      /* Background Accent Ribbons Top & Bottom */
+      .top-gold-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 18mm;
+        background: linear-gradient(135deg, #071120 0%, #0a192f 70%, #d4af37 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 65%, 0 100%);
+        z-index: 1;
+      }
+
+      .bottom-gold-bg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 22mm;
+        background: linear-gradient(135deg, #d4af37 0%, #0a192f 30%, #071120 100%);
+        clip-path: polygon(0 35%, 100% 0, 100% 100%, 0 100%);
+        z-index: 1;
+      }
+
+      .footer-quote {
+        position: absolute;
+        bottom: 5mm;
+        right: 12mm;
+        z-index: 10;
+        color: #ffffff;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-size: 10pt;
+        font-weight: 600;
+      }
+
+      /* Header Template */
+      .opr-template-header {
+        position: relative;
+        z-index: 5;
         display: flex;
         align-items: center;
-        border-bottom: 3px solid #1e3a8a;
-        padding-bottom: 8px;
-        margin-bottom: 8px;
+        margin-top: 4mm;
+        margin-bottom: 3mm;
       }
 
-      .opr-header-logo {
-        width: 65px;
-        height: 65px;
-        object-fit: contain;
-        margin-right: 12px;
-      }
-
-      .opr-header-details { flex: 1; }
-      .opr-header-details h2 { margin: 0; font-size: 13pt; font-weight: 800; color: #1e3a8a; text-transform: uppercase; }
-      .opr-header-details h3 { margin: 2px 0 0 0; font-size: 10pt; font-weight: 700; color: #0f172a; text-transform: uppercase; }
-      .opr-header-details p { margin: 2px 0 0 0; font-size: 8pt; color: #475569; }
-
-      /* Spanduk Tajuk Program */
-      .opr-program-banner {
-        background: #1e3a8a !important;
-        color: #ffffff !important;
-        text-align: center;
-        padding: 8px 12px;
-        font-size: 12pt;
-        font-weight: 800;
-        text-transform: uppercase;
-        border-radius: 6px;
-        margin-bottom: 10px;
-        letter-spacing: 0.5px;
-      }
-
-      /* Badan Laporan (2 Lajur Kiri & Kanan) */
-      .opr-body-grid {
-        display: grid;
-        grid-template-columns: 240px 1fr;
-        gap: 12px;
-        flex: 1; /* Mengisi penuh ruang tengah A4 */
-      }
-
-      /* Lajur Kiri (Metadata & Gambar) */
-      .opr-left-column {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .opr-meta-box {
-        background: #f8fafc;
-        border: 1px solid #cbd5e1;
-        border-radius: 8px;
-        padding: 8px;
-        margin-bottom: 10px;
-      }
-
-      .meta-item {
-        margin-bottom: 6px;
-      }
-      .meta-item:last-child { margin-bottom: 0; }
-
-      .meta-title {
-        font-size: 7.5pt;
-        font-weight: 800;
-        color: #1e3a8a;
-        text-transform: uppercase;
-      }
-
-      .meta-value {
-        font-size: 8.5pt;
-        font-weight: 600;
-        color: #0f172a;
+      .logo-circle-container {
+        width: 28mm;
+        height: 28mm;
+        border-radius: 50%;
         background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 4px;
-        padding: 4px 6px;
-        margin-top: 2px;
-        word-break: break-word;
-      }
-
-      /* Grid 4 Gambar Aktiviti (2x2) */
-      .opr-photos-wrapper {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .opr-photos-title {
-        font-size: 8pt;
-        font-weight: 800;
-        color: #1e3a8a;
-        text-transform: uppercase;
-        margin-bottom: 4px;
-      }
-
-      .opr-photos-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 6px;
-        flex: 1;
-      }
-
-      .photo-frame {
-        width: 100%;
-        height: 100%;
-        min-height: 90px;
-        background: #f1f5f9;
-        border: 1px solid #cbd5e1;
-        border-radius: 6px;
-        overflow: hidden;
+        border: 2.5pt solid #d4af37;
+        box-shadow: 0 0 0 1.5pt #0a192f;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-right: 4mm;
+        flex-shrink: 0;
       }
 
-      .photo-frame img {
+      .logo-circle-container img {
+        width: 85%;
+        height: 85%;
+        object-fit: contain;
+      }
+
+      .header-title-box {
+        flex: 1;
+        text-align: center;
+        border-left: 3pt solid #0a192f;
+        padding-left: 4mm;
+      }
+
+      .header-title-box h2 {
+        margin: 0;
+        font-size: 15pt;
+        font-weight: 900;
+        color: #0a192f;
+        letter-spacing: 0.5px;
+      }
+
+      .header-title-box p {
+        margin: 1mm 0 0 0;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-size: 11pt;
+        font-weight: 600;
+        color: #1e3a8a;
+      }
+
+      .banner-opr-title {
+        position: relative;
+        z-index: 5;
+        background: linear-gradient(90deg, #071120 0%, #0a192f 50%, #071120 100%);
+        border: 1.5pt solid #d4af37;
+        border-radius: 6px;
+        color: #ffffff;
+        text-align: center;
+        padding: 2.5mm;
+        font-size: 12pt;
+        font-weight: 800;
+        letter-spacing: 1px;
+        margin-bottom: 4mm;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      }
+
+      /* Program Info Box */
+      .program-info-box {
+        position: relative;
+        z-index: 5;
+        border: 1.5pt solid #0a192f;
+        border-radius: 10px;
+        padding: 3mm 4mm;
+        background: #ffffff;
+        margin-bottom: 4mm;
+      }
+
+      .info-row {
+        display: flex;
+        font-size: 9.5pt;
+        margin-bottom: 1.5mm;
+        line-height: 1.2;
+      }
+      .info-row:last-child { margin-bottom: 0; }
+      .info-label { width: 32mm; font-weight: 800; color: #0a192f; }
+      .info-colon { margin-right: 2mm; font-weight: 800; }
+      .info-val { flex: 1; font-weight: 600; color: #000000; border-bottom: 1px solid #cbd5e1; }
+
+      /* 4 Photo Grid Layout */
+      .photo-grid-container {
+        position: relative;
+        z-index: 5;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3mm;
+        margin-bottom: 4mm;
+      }
+
+      .photo-card-box {
+        border: 1.5pt solid #0a192f;
+        border-radius: 8px;
+        background: #f1f5f9;
+        height: 42mm;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .photo-card-box img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
 
-      /* Lajur Kanan (Blok Teks Utama) */
-      .opr-right-column {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .opr-content-block {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 8px;
-      }
-      .opr-content-block:last-child { margin-bottom: 0; }
-
-      .block-title {
-        background: #e2e8f0 !important;
-        color: #1e3a8a !important;
-        font-size: 8.5pt;
-        font-weight: 800;
-        padding: 4px 8px;
-        border-left: 4px solid #1e3a8a;
-        text-transform: uppercase;
-        margin-bottom: 3px;
-      }
-
-      .block-text {
-        flex: 1;
-        background: #ffffff;
-        border: 1px solid #cbd5e1;
-        border-radius: 0 0 6px 6px;
-        padding: 6px 8px;
-        font-size: 8.2pt;
-        line-height: 1.3;
-        white-space: pre-line;
-        color: #0f172a;
-      }
-
-      /* Kaki Laporan & Pengesahan */
-      .opr-footer {
-        border-top: 2px solid #1e3a8a;
-        padding-top: 6px;
-        margin-top: 8px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+      .photo-placeholder-text {
         font-size: 8pt;
+        font-weight: 700;
+        color: #64748b;
+        text-align: center;
       }
 
-      .opr-footer-left { color: #64748b; font-weight: 500; }
-      .opr-footer-right { font-weight: 700; color: #0f172a; text-align: right; }
+      /* 4 Content Blocks Grid */
+      .content-blocks-grid {
+        position: relative;
+        z-index: 5;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3mm;
+        flex: 1;
+      }
+
+      .block-item {
+        border: 1.5pt solid #0a192f;
+        border-radius: 10px;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .block-badge-header {
+        background: #0a192f;
+        color: #ffffff;
+        padding: 2mm 3mm;
+        font-size: 9pt;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        border-bottom: 1.5pt solid #d4af37;
+      }
+
+      .block-icon-circle {
+        width: 5mm;
+        height: 5mm;
+        border-radius: 50%;
+        background: #d4af37;
+        color: #0a192f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 7pt;
+        font-weight: 900;
+      }
+
+      .block-body-text {
+        padding: 2.5mm 3mm;
+        font-size: 8.5pt;
+        line-height: 1.3;
+        color: #0f172a;
+        white-space: pre-line;
+        flex: 1;
+      }
+
+      .footer-provided-by {
+        position: relative;
+        z-index: 5;
+        text-align: right;
+        font-size: 8pt;
+        font-weight: 700;
+        color: #0a192f;
+        margin-top: 2mm;
+        padding-right: 2mm;
+      }
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="card">
-    
-    <!-- Pengepala Form Web -->
-    <div class="header-banner">
-      <img src="logo.jpg" alt="Logo SK Simpang Rawai" class="school-logo-web">
-      <h1>SK SIMPANG RAWAI</h1>
-      <p>Sistem Pembangkit Laporan One Page Report (OPR)</p>
-    </div>
-
-    <form id="oprForm">
-      <div class="section-title">📌 Maklumat Laporan Program</div>
-
-      <div class="form-group">
-        <label>Tajuk Program / Aktiviti:</label>
-        <input type="text" id="tajuk" placeholder="Contoh: PROGRAM SAFE 'KAMU BULI POLIS TANGKAP'" required>
-      </div>
-
-      <div class="form-grid">
-        <div class="form-group">
-          <label>Unit / Anjuran:</label>
-          <input type="text" id="unit" placeholder="Contoh: Unit Hal Ehwal Murid (HEM)">
-        </div>
-        <div class="form-group">
-          <label>Tarikh Program:</label>
-          <input type="date" id="tarikh" required>
-        </div>
-        <div class="form-group">
-          <label>Masa:</label>
-          <input type="text" id="masa" placeholder="Contoh: 11.00 am - 12.30 pm">
-        </div>
-        <div class="form-group">
-          <label>Tempat:</label>
-          <input type="text" id="tempat" placeholder="Contoh: Dewan Al-Jazari">
-        </div>
-      </div>
-
-      <div class="form-grid">
-        <div class="form-group">
-          <label>Sasaran:</label>
-          <input type="text" id="sasaran" placeholder="Contoh: Semua Murid Tahap 2">
-        </div>
-        <div class="form-group">
-          <label>Disediakan Oleh (Nama Guru):</label>
-          <input type="text" id="penyedia" placeholder="Contoh: Cikgu Ahmad Bin Ismail">
-        </div>
-      </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-ai" onclick="generateAI()">✨ AI Generate Objektif & Impak Ringkas</button>
-      </div>
-
-      <div class="section-title">📝 Perincian & Pengisian OPR</div>
-
-      <div class="form-group">
-        <label>Objektif Program:</label>
-        <textarea id="objektif" placeholder="Tuliskan objektif program atau jana secara automatik..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Ringkasan Aktiviti Program:</label>
-        <textarea id="aktiviti" placeholder="Ringkaskan aktiviti yang dijalankan semasa program..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Impak / Hasil Program:</label>
-        <textarea id="impak" placeholder="Tuliskan hasil/impak program..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Cadangan Penambahbaikan:</label>
-        <textarea id="penambahbaikan" placeholder="Tuliskan cadangan penambahbaikan untuk masa akan datang..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Muat Naik Gambar Aktiviti (Sehingga 4 Gambar):</label>
-        <input type="file" id="gambarInput" accept="image/*" multiple onchange="processImages()">
-        <div id="preview" class="preview-grid"></div>
-      </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-submit" id="btnSimpan" onclick="simpanKeSheets()">💾 Simpan Rekod ke Drive & Sheets</button>
-        <button type="button" class="btn btn-print" onclick="prepareAndPrint()">🖨️ Cetak Laporan OPR / Simpan PDF (1 Page Full A4)</button>
-      </div>
-    </form>
-
-    <!-- Paparan Live Sheet -->
-    <div class="sheet-container">
-      <div class="section-title">📊 Rekod Laporan OPR (Google Sheet Live)</div>
-      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS_dLChN5Jo22s1_7vKcJQq-Kr2wdmcL0aS28fARoirj3VHAk8eGcra3Rlm6hSN4Ssv_Lq0SoZSiXUT/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
-    </div>
-
-  </div>
-</div>
-
-<!-- =========================================================
-     RUANGAN HASIL CETAKAN RASMI FULL A4 (PRINT LAYOUT)
-     ========================================================= -->
-<div id="printArea">
   
-  <!-- Header Cetakan -->
-  <div class="opr-header-container">
-    <img src="logo.jpg" alt="Logo SK Simpang Rawai" class="opr-header-logo">
-    <div class="opr-header-details">
-      <h2>SEKOLAH KEBANGSAAN SIMPANG RAWAI</h2>
-      <h3>DOKUMENTASI ONE PAGE REPORT (OPR)</h3>
-      <p>Kuala Terengganu, Terengganu Darul Iman</p>
-    </div>
+  <!-- Tab Navigation -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('tabBorang')">📝 Penjana OPR Baharu</button>
+    <button class="tab-btn" onclick="switchTab('tabArkib')">📁 Arkib & Rekod OPR</button>
   </div>
 
-  <!-- Banner Tajuk -->
-  <div class="opr-program-banner" id="pTajuk">TAJUK PROGRAM / AKTIVITI</div>
-
-  <!-- Badan Laporan 2 Lajur -->
-  <div class="opr-body-grid">
-    
-    <!-- Lajur Kiri: Maklumat & Gambar -->
-    <div class="opr-left-column">
-      <div class="opr-meta-box">
-        <div class="meta-item">
-          <div class="meta-title">📅 TARIKH</div>
-          <div class="meta-value" id="pTarikh">-</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-title">⏰ MASA</div>
-          <div class="meta-value" id="pMasa">-</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-title">📍 TEMPAT</div>
-          <div class="meta-value" id="pTempat">-</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-title">🏛️ ANJURAN</div>
-          <div class="meta-value" id="pUnit">-</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-title">🎯 SASARAN</div>
-          <div class="meta-value" id="pSasaran">-</div>
-        </div>
-      </div>
-
-      <div class="opr-photos-wrapper">
-        <div class="opr-photos-title">🖼️ RAKAMAN GAMBAR AKTIVITI</div>
-        <div class="opr-photos-grid" id="pPhotosGrid">
-          <div class="photo-frame"><span style="font-size:7pt;color:#94a3b8;">Gambar 1</span></div>
-          <div class="photo-frame"><span style="font-size:7pt;color:#94a3b8;">Gambar 2</span></div>
-          <div class="photo-frame"><span style="font-size:7pt;color:#94a3b8;">Gambar 3</span></div>
-          <div class="photo-frame"><span style="font-size:7pt;color:#94a3b8;">Gambar 4</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Lajur Kanan: Blok Teks Kandungan Utama -->
-    <div class="opr-right-column">
+  <!-- TAB 1: BORANG PENJANA OPR -->
+  <div id="tabBorang" class="tab-content active">
+    <div class="card">
       
-      <div class="opr-content-block">
-        <div class="block-title">1. OBJEKTIF PROGRAM</div>
-        <div class="block-text" id="pObjektif">-</div>
+      <div class="header-banner">
+        <img src="logo.jpg" alt="Logo SK Simpang Rawai" class="school-logo-web">
+        <h1>SK SIMPANG RAWAI</h1>
+        <p>"Ilmu, Disiplin, Prestasi"</p>
       </div>
 
-      <div class="opr-content-block">
-        <div class="block-title">2. RINGKASAN AKTIVITI PROGRAM</div>
-        <div class="block-text" id="pAktiviti">-</div>
-      </div>
+      <form id="oprForm">
+        <div class="section-title">📌 Maklumat Utama Program</div>
 
-      <div class="opr-content-block">
-        <div class="block-title">3. IMPAK / HASIL PROGRAM</div>
-        <div class="block-text" id="pImpak">-</div>
-      </div>
+        <div class="form-group">
+          <label>Nama Program / Aktiviti:</label>
+          <input type="text" id="tajuk" placeholder="Contoh: PELANCARAN NILAM & GALAKAN MEMBACA 2026" required>
+        </div>
 
-      <div class="opr-content-block">
-        <div class="block-title">4. CADANGAN PENAMBAHBAIKAN</div>
-        <div class="block-text" id="pPenambahbaikan">-</div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- Kaki Laporan & Pengesahan -->
-  <div class="opr-footer">
-    <div class="opr-footer-left">SK Simpang Rawai | Laporan Rasmi Program</div>
-    <div class="opr-footer-right">Disediakan oleh: <span id="pPenyedia" style="text-decoration:underline;">-</span></div>
-  </div>
-
-</div>
-
-<script>
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw1-5wokDewD3Dq8qq4138XI8NCOYEfsAxxFcB5bVOPpKXV_TxWMetlGqUOgAvlowHp/exec";
-  let compressedImages = [];
-
-  function processImages() {
-    const files = Array.from(document.getElementById('gambarInput').files).slice(0, 4);
-    const container = document.getElementById('preview');
-    container.innerHTML = '';
-    compressedImages = [];
-
-    files.forEach(file => {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.src = e.target.result;
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          const maxDim = 800;
-          let width = img.width;
-          let height = img.height;
-
-          if (width > height && width > maxDim) {
-            height *= maxDim / width;
-            width = maxDim;
-          } else if (height > maxDim) {
-            width *= maxDim / height;
-            height = maxDim;
-          }
-
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-
-          const base64Res = canvas.toDataURL('image/jpeg', 0.7);
-          compressedImages.push(base64Res);
-
-          const previewImg = document.createElement('img');
-          previewImg.src = base64Res;
-          previewImg.className = 'preview-img';
-          container.appendChild(previewImg);
-        };
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-
-  function generateAI() {
-    const tajuk = document.getElementById("tajuk").value;
-    const sasaran = document.getElementById("sasaran").value || "murid/peserta";
-    
-    if (!tajuk) {
-      alert("Sila isi Tajuk Program terlebih dahulu untuk membolehkan AI menjana Objektif & Impak.");
-      return;
-    }
-
-    document.getElementById("objektif").value = `1. Meningkatkan kesedaran dan pemahaman peserta berkaitan ${tajuk}.\n2. Memupuk nilai murni dan penglibatan aktif dalam kalangan ${sasaran}.\n3. Mewujudkan persekitaran sekolah yang bermaklumat, kondusif, dan berdisiplin.`;
-    document.getElementById("aktiviti").value = `1. Perasmian ringkas dan ucapan aluan penganjur.\n2. Sesi ceramah / penyampaian slot utama berkaitan ${tajuk} kepada ${sasaran}.\n3. Penilaian program dan penyerahan sijil/cenderamata.`;
-    document.getElementById("impak").value = `1. Peserta memberi respon amat positif dan memahami objektif utama program.\n2. Pembentukan sahsiah diri dan semangat berpasukan dalam kalangan ${sasaran}.\n3. Program berjalan dengan lancar dan mencapai sasaran yang ditetapkan.`;
-    document.getElementById("penambahbaikan").value = `1. Menyusun jadual aktiviti dengan lebih fleksibel mengikut kesesuaian masa sekolah.\n2. Menyediakan bahan edaran dan media visual interaktif pada masa akan datang.\n3. Meningkatkan penglibatan serta kerjasama pelbagai pihak luar.`;
-    
-    alert("✨ AI berjaya menjana cadangan Objektif, Aktiviti, Impak & Penambahbaikan!");
-  }
-
-  async function simpanKeSheets() {
-    const btn = document.getElementById("btnSimpan");
-    btn.disabled = true;
-    btn.innerText = "⏳ Memproses & Menghantar...";
-
-    let rawDate = document.getElementById("tarikh").value;
-    let formattedDate = rawDate;
-    if (rawDate) {
-      const d = new Date(rawDate);
-      formattedDate = d.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
-    }
-
-    const payload = {
-      tajuk: document.getElementById("tajuk").value,
-      unit: document.getElementById("unit").value,
-      tarikh: formattedDate,
-      masa: document.getElementById("masa").value,
-      tempat: document.getElementById("tempat").value,
-      sasaran: document.getElementById("sasaran").value,
-      jemputan: document.getElementById("penyedia").value,
-      objektif: document.getElementById("objektif").value,
-      impak: document.getElementById("impak").value,
-      gambarList: compressedImages
-    };
-
-    try {
-      await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      alert("✅ Data & Gambar berjaya dihantar ke Google Drive & Sheets!");
-    } catch (e) {
-      alert("❌ Ralat: " + e.message);
-    } finally {
-      btn.disabled = false;
-      btn.innerText = "💾 Simpan Rekod ke Drive & Sheets";
-    }
-  }
-
-  function prepareAndPrint() {
-    let rawDate = document.getElementById('tarikh').value;
-    let displayDate = "-";
-    if (rawDate) {
-      const d = new Date(rawDate);
-      displayDate = d.toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' });
-    }
-
-    document.getElementById('pTajuk').innerText = document.getElementById('tajuk').value || "TAJUK PROGRAM / AKTIVITI";
-    document.getElementById('pUnit').innerText = document.getElementById('unit').value || "-";
-    document.getElementById('pTarikh').innerText = displayDate;
-    document.getElementById('pMasa').innerText = document.getElementById('masa').value || "-";
-    document.getElementById('pTempat').innerText = document.getElementById('tempat').value || "-";
-    document.getElementById('pSasaran').innerText = document.getElementById('sasaran').value || "-";
-    document.getElementById('pPenyedia').innerText = document.getElementById('penyedia').value || "Guru SK Simpang Rawai";
-
-    document.getElementById('pObjektif').innerText = document.getElementById('objektif').value || "-";
-    document.getElementById('pAktiviti').innerText = document.getElementById('aktiviti').value || "-";
-    document.getElementById('pImpak').innerText = document.getElementById('impak').value || "-";
-    document.getElementById('pPenambahbaikan').innerText = document.getElementById('penambahbaikan').value || "-";
-
-    // Isikan 4 Ruang Gambar Pada Cetakan
-    const pGrid = document.getElementById('pPhotosGrid');
-    pGrid.innerHTML = '';
-
-    for (let i = 0; i < 4; i++) {
-      const box = document.createElement('div');
-      box.className = 'photo-frame';
-      if (compressedImages[i]) {
-        box.innerHTML = `<img src="${compressedImages[i]}" alt="Gambar ${i+1}">`;
-      } else {
-        box.innerHTML = `<span style="font-size:7pt;color:#94a3b8;">Gambar ${i+1}</span>`;
-      }
-      pGrid.appendChild(box);
-    }
-
-    window.print();
-  }
-</script>
-</body>
-</html>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Tarikh Program:</label>
+            <input type="date" id="tarikh" required>
+          </div>
+          <div class="form-group">
+            <label>Masa:</label>
+            <input type="text" id="masa" placeholder="Contoh: 8.00 pagi - 10.30 pagi">
+          </div>
+          <div class="form-group">
+            <label>Tempat:</label>
+            <input type="text" id="tempat" placeholder="Contoh: Dewan Sekolah / Pusat Sumber">
+          </div>
+          <div class="form-group">
+            <label>Anjuran / Unit:</label>
